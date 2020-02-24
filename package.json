@@ -1,0 +1,26 @@
+{
+  "name": "aws-pdf-textract-pipeline",
+  "version": "1.0.0",
+  "description": "Scheduled pipline for AWS textract + lambda",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^10.17.0",
+    "typescript": "~3.7.2"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-dynamodb": "^1.25.0",
+    "@aws-cdk/aws-events": "*",
+    "@aws-cdk/aws-events-targets": "*",
+    "@aws-cdk/aws-lambda": "*",
+    "@aws-cdk/aws-lambda-event-sources": "^1.25.0",
+    "@aws-cdk/core": "*",
+    "@types/puppeteer": "^2.0.0",
+    "puppeteer-lambda": "^1.1.3"
+  }
+}
