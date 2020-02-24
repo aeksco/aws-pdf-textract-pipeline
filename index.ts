@@ -201,6 +201,8 @@ export class LambdaCronStack extends cdk.Stack {
       code: new lambda.AssetCode("src"),
       handler: "queueResult.handler",
       runtime: lambda.Runtime.NODEJS_10_X,
+      timeout: cdk.Duration.seconds(300),
+      memorySize: 1024,
       environment: {
         TABLE_NAME: parsedPdfDataTable.tableName,
         PRIMARY_KEY: "itemId",

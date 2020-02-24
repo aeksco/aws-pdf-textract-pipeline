@@ -1,0 +1,5 @@
+src/*.js
+index.js
+node_modules/
+cdk.out
+data/

@@ -68,11 +68,8 @@ export const handler = async (event: any = {}): Promise<any> => {
   console.log(params);
 
   await new Promise(resolve => {
-    // textract.getDocumentAnalysis(params, function(err: any, data: any) {
-    textract.getDocumentTextDetection(params, async function(
-      err: any,
-      data: any
-    ) {
+    // textract.getDocumentTextDetection(params, async function(
+    textract.getDocumentAnalysis(params, async function(err: any, data: any) {
       console.log("err, err.stack");
       console.log(err);
       // an error occurred
@@ -83,9 +80,7 @@ export const handler = async (event: any = {}): Promise<any> => {
       // Defines the item we're inserting into the database
       const item: any = {
         [PRIMARY_KEY]: JobId,
-        data: {
-          ...data
-        }
+        data
       };
 
       // Defines the params for db.put
@@ -94,8 +89,17 @@ export const handler = async (event: any = {}): Promise<any> => {
         Item: item
       };
 
+      console.log("dynamoParams");
+      console.log(dynamoParams);
+
       // Inserts the record into the DynamoDB table
-      await db.put(dynamoParams).promise();
+      // TODO - wrap this call to DynamoDB in try/catch
+      try {
+        await db.put(dynamoParams).promise();
+      } catch (e) {
+        console.log("ERROR INSERTING DATA INTO DYNAMO DB");
+        console.log(e);
+      }
       console.log("Inserted into DynamoDB");
     });
   });

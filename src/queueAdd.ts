@@ -43,7 +43,7 @@ export const handler = async (event: any = {}): Promise<any> => {
   // // // //
   // // // //
 
-  var params = {
+  var params: AWS.Textract.StartDocumentAnalysisRequest = {
     DocumentLocation: {
       S3Object: {
         Bucket: S3_BUCKET_NAME,
@@ -53,6 +53,7 @@ export const handler = async (event: any = {}): Promise<any> => {
     },
     // ClientRequestToken: filename,
     // JobTag: "FORM_04",
+    FeatureTypes: ["FORMS"],
     NotificationChannel: {
       RoleArn: SNS_ROLE_ARN,
       SNSTopicArn: SNS_TOPIC_ARN
@@ -63,7 +64,8 @@ export const handler = async (event: any = {}): Promise<any> => {
   console.log(params);
 
   await new Promise(resolve => {
-    return textract.startDocumentTextDetection(params, function(err, data) {
+    // return textract.startDocumentTextDetection(params, function(err, data) {
+    return textract.startDocumentAnalysis(params, function(err, data) {
       // if (err) console.log(err, err.stack);
       // an error occurred
       // else console.log(data); // successful response
