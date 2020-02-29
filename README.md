@@ -6,5 +6,15 @@ Data pipeline for crawling PDFs from the Web and transforming their contents int
 
 **Commands**
 
+- `yarn install`
 - `cdk bootstrap`
 - `cdk deploy`
+- `yarn test`
+
+**Additional Resources**
+
+- CDK Documentation
+- CDK TypeScript Reference
+- Textract Pricing Chart
+- CDK Resources
+- [awesome-cdk repo](https://github.com/eladb/awesome-cdk)
