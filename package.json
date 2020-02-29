@@ -5,21 +5,27 @@
   "private": true,
   "scripts": {
     "build": "tsc",
+    "test": "jest",
     "watch": "tsc -w",
     "cdk": "cdk"
   },
   "license": "MIT",
   "devDependencies": {
+    "@aws-cdk/assert": "^1.20.0",
     "@types/node": "^10.17.0",
+    "@types/jest": "^24.0.25",
+    "jest": "^25.1.0",
+    "ts-jest": "^24.3.0",
     "typescript": "~3.7.2"
   },
   "dependencies": {
-    "@aws-cdk/aws-dynamodb": "^1.25.0",
-    "@aws-cdk/aws-events": "*",
-    "@aws-cdk/aws-events-targets": "*",
-    "@aws-cdk/aws-lambda": "*",
-    "@aws-cdk/aws-lambda-event-sources": "^1.25.0",
-    "@aws-cdk/core": "*",
+    "@aws-cdk/aws-dynamodb": "^1.20.0",
+    "@aws-cdk/aws-events": "^1.20.0",
+    "@aws-cdk/aws-events-targets": "^1.20.0",
+    "@aws-cdk/aws-iam": "^1.20.0",
+    "@aws-cdk/aws-lambda": "^1.20.0",
+    "@aws-cdk/aws-lambda-event-sources": "^1.20.0",
+    "@aws-cdk/core": "^1.20.0",
     "@types/puppeteer": "^2.0.0",
     "puppeteer-lambda": "^1.1.3"
   }
