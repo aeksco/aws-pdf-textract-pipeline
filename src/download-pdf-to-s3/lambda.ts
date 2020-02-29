@@ -37,26 +37,6 @@
 //   ]
 // }
 
-// import * as AWS from "aws-sdk";
-
-// function download(url: string, dest: string) {
-//   // Defines writable stream to out
-//   // const file = fs.createWriteStream(dest);
-//   http.get(url, function(response) {
-//     response.pipe(file);
-//   });
-// }
-
-// download(
-//   "http://ogccweblink.state.co.us/DownloadDocumentPDF.aspx?DocumentId=2627568",
-//   "output.pdf",
-//   () => {
-//     console.log("Done");
-//   }
-// );
-
-// // // //
-
 import * as http from "http";
 import * as fs from "fs";
 import * as AWS from "aws-sdk";
@@ -76,7 +56,7 @@ function downloadFile(url: string, dest: string): Promise<any> {
       console.log("downloaded file: " + url);
 
       response.pipe(file);
-      file.on("finish", function () {
+      file.on("finish", function() {
         console.log("wrote to file");
 
         file.close();

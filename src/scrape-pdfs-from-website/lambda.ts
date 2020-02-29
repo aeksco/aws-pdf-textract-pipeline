@@ -6,10 +6,11 @@ const PRIMARY_KEY = process.env.PRIMARY_KEY || "";
 
 // // // //
 
+// The URL from which the PDF download URLs are being fetched
 const fetchUrl =
   "http://ogccweblink.state.co.us/Results.aspx?DocName=WELL%20ABANDONMENT%20REPORT%20(INTENT)&DocDate=02/03/2020";
 
-// export const handler = async (): Promise<any> => {
+// TODO - replace any with correct type
 export const handler = async (
   event: any = {},
   context: any = {}
@@ -36,12 +37,6 @@ export const handler = async (
 
     // Defines page
     let page = await browser.newPage();
-
-    // Set downloads directory
-    // await page._client.send("Page.setDownloadBehavior", {
-    //   behavior: "allow",
-    //   downloadPath: "./"
-    // });
 
     // Navigate to page, wait until dom content is loaded
     await page.goto(event.url || fetchUrl, {

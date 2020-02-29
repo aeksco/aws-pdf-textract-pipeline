@@ -1,3 +1,4 @@
+// Example `event` parameter
 // {
 //   "Records": [
 //     {
@@ -21,7 +22,6 @@
 //   ]
 // }
 
-// // // //
 // // // //
 
 // DOC: https://docs.aws.amazon.com/textract/latest/dg/examples-extract-kvp.html
@@ -115,20 +115,12 @@ const db = new AWS.DynamoDB.DocumentClient();
 const textract = new AWS.Textract({ region: "us-west-2" });
 const TABLE_NAME = process.env.TABLE_NAME || "";
 const PRIMARY_KEY = process.env.PRIMARY_KEY || "";
-// const SNS_TOPIC_ARN = process.env.SNS_TOPIC_ARN || "";
-// const SNS_ROLE_ARN = process.env.SNS_ROLE_ARN || "";
-// const S3_BUCKET_NAME = process.env.S3_BUCKET_NAME || "";
-// const SQS_URL = process.env.SQS_URL || "";
-// const SNS_TOPIC_ARN = process.env.SNS_TOPIC_ARN || "";
-// const SNS_ROLE_ARN = process.env.SNS_ROLE_ARN || "";
 
 export const handler = async (event: any = {}): Promise<any> => {
   console.log("QUEUE RESULT");
-  // console.log(SNS_TOPIC_ARN);
-  // console.log(SNS_ROLE_ARN);
   console.log(JSON.stringify(event, null, 4));
-  // return;
 
+  // TODO - annotate this
   let JobId = "";
   try {
     JobId = event["Records"][0]["Sns"]["Message"];
