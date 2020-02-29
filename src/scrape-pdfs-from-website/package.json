@@ -1,7 +1,7 @@
 {
-  "name": "lambda-task",
+  "name": "scrape-pdfs-lambda",
   "version": "1.0.0",
-  "description": "Running a Lambda on a schedule",
+  "description": "Scrapes PDF download URLs using Puppeteer",
   "private": true,
   "dependencies": {
     "chrome-aws-lambda": "^2.1.1",

@@ -22,6 +22,93 @@
 // }
 
 // // // //
+// // // //
+
+// DOC: https://docs.aws.amazon.com/textract/latest/dg/examples-extract-kvp.html
+// DOC: https://docs.aws.amazon.com/textract/latest/dg/examples-export-table-csv.html
+function find_value_block(key_block: any, value_map: any) {
+  let value_block = "";
+  key_block["Relationships"].forEach((relationship: any) => {
+    if (relationship["Type"] == "VALUE") {
+      relationship["Ids"].forEach((value_id: any) => {
+        value_block = value_map[value_id];
+      });
+    }
+  });
+  return value_block;
+}
+
+// // // //
+
+function get_text(result: any, blocks_map: any) {
+  let text = "";
+  let word;
+  if (result["Relationships"]) {
+    result["Relationships"].forEach((relationship: any) => {
+      if (relationship["Type"] === "CHILD") {
+        relationship["Ids"].forEach((child_id: any) => {
+          word = blocks_map[child_id];
+
+          if (word["BlockType"] == "WORD") {
+            text += word["Text"] + " ";
+          }
+          if (word["BlockType"] == "SELECTION_ELEMENT") {
+            if (word["SelectionStatus"] == "SELECTED") {
+              text += "X ";
+            }
+          }
+        });
+      }
+    });
+  }
+  return text;
+}
+
+// // // //
+
+function getKvMap(resp: any) {
+  console.log("Get KV Map");
+
+  // get key and value maps
+  let key_map: any = {};
+  let value_map: any = {};
+  let block_map: any = {};
+
+  resp["Blocks"].forEach((block: any) => {
+    const block_id = block["Id"];
+    block_map[block_id] = block;
+    if (block["BlockType"] == "KEY_VALUE_SET") {
+      if (block["EntityTypes"].includes("KEY")) {
+        key_map[block_id] = block;
+      } else {
+        value_map[block_id] = block;
+      }
+    }
+  });
+
+  return [key_map, value_map, block_map];
+}
+
+// // // //
+
+function getKvRelationship(keyMap: any, valueMap: any, blockMap: any) {
+  let kvs: any = {};
+  // for block_id, key_block in key_map.items():
+  Object.keys(keyMap).forEach(blockId => {
+    const keyBlock = keyMap[blockId];
+    const value_block = find_value_block(keyBlock, valueMap);
+    // console.log("value_block");
+
+    // Gets Key + Value
+    const key = get_text(keyBlock, blockMap);
+    const val = get_text(value_block, blockMap);
+    kvs[key] = val;
+  });
+
+  return kvs;
+}
+
+// // // //
 
 import * as AWS from "aws-sdk";
 const db = new AWS.DynamoDB.DocumentClient();
@@ -75,12 +162,44 @@ export const handler = async (event: any = {}): Promise<any> => {
       // an error occurred
       console.log("data"); // successful response
       console.log(data); // successful response
-      resolve(data);
+      // resolve(data);
+
+      // Gets KV mapping
+      const [keyMap, valueMap, blockMap] = getKvMap(data);
+
+      // Get Key Value relationship
+      const kvPairs = getKvRelationship(keyMap, valueMap, blockMap);
+
+      console.log("Got KV pairs");
+
+      // Sanitize KV pairs
+      const sanitizedKvPairs: { [key: string]: string } = {};
+
+      // Iterate over each key in kvPairs
+      Object.keys(kvPairs).forEach((key: string) => {
+        // Sanitizes the key from kv pairs
+        const sanitizedKey: string = key
+          .toLowerCase()
+          .trim()
+          .replace(/\s/g, "_")
+          .replace(":", "");
+
+        // Pulls value from kbPairs, trims whitespace
+        const value: string = kvPairs[key].trim();
+
+        // Assigns value from kvPairs to sanitizedKey
+        if (value !== "") {
+          sanitizedKvPairs[sanitizedKey] = kvPairs[key];
+        }
+      });
+
+      console.log("SanitizedKvPairs");
+      console.log(sanitizedKvPairs);
 
       // Defines the item we're inserting into the database
       const item: any = {
         [PRIMARY_KEY]: JobId,
-        data
+        data: sanitizedKvPairs
       };
 
       // Defines the params for db.put
@@ -96,6 +215,7 @@ export const handler = async (event: any = {}): Promise<any> => {
       // TODO - wrap this call to DynamoDB in try/catch
       try {
         await db.put(dynamoParams).promise();
+        resolve(true);
       } catch (e) {
         console.log("ERROR INSERTING DATA INTO DYNAMO DB");
         console.log(e);

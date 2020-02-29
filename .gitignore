@@ -1,4 +1,4 @@
-src/*.js
+src/**/*.js
 index.js
 node_modules/
 cdk.out

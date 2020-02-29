@@ -76,7 +76,7 @@ function downloadFile(url: string, dest: string): Promise<any> {
       console.log("downloaded file: " + url);
 
       response.pipe(file);
-      file.on("finish", function() {
+      file.on("finish", function () {
         console.log("wrote to file");
 
         file.close();

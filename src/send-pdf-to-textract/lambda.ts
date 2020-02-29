@@ -3,7 +3,6 @@ const textract = new AWS.Textract({ region: "us-west-2" });
 const SNS_TOPIC_ARN = process.env.SNS_TOPIC_ARN || "";
 const SNS_ROLE_ARN = process.env.SNS_ROLE_ARN || "";
 const S3_BUCKET_NAME = process.env.S3_BUCKET_NAME || "";
-const SQS_URL = process.env.SQS_URL || "";
 
 export const handler = async (event: any = {}): Promise<any> => {
   console.log("ADD TO QUEUE");
@@ -11,8 +10,6 @@ export const handler = async (event: any = {}): Promise<any> => {
   console.log(SNS_TOPIC_ARN);
   console.log("SNS_ROLE_ARN");
   console.log(SNS_ROLE_ARN);
-  console.log("SQS_URL");
-  console.log(SQS_URL);
   console.log(JSON.stringify(event, null, 4));
 
   // Pulls filename from event
@@ -25,30 +22,12 @@ export const handler = async (event: any = {}): Promise<any> => {
 
   console.log("filename: " + filename);
 
-  // // Defines params for Textract API call
-  // const textractParams: AWS.Textract.AnalyzeDocumentRequest = {
-  //   Document: {
-  //     S3Object: {
-  //       Bucket: S3_BUCKET_NAME,
-  //       Name: filename
-  //       // Version: "STRING_VALUE"
-  //     }
-  //   },
-  //   FeatureTypes: ["TABLES", "FORMS"]
-  // };
-
-  // console.log("textractParams");
-  // console.log(textractParams);
-
-  // // // //
-  // // // //
-
-  var params: AWS.Textract.StartDocumentAnalysisRequest = {
+  // Defines params for Textract API call
+  const params: AWS.Textract.StartDocumentAnalysisRequest = {
     DocumentLocation: {
       S3Object: {
         Bucket: S3_BUCKET_NAME,
         Name: filename
-        // Version: "STRING_VALUE"
       }
     },
     // ClientRequestToken: filename,
