@@ -1,6 +1,8 @@
 # aws-pdf-textract-pipeline
 
-:mag: Data pipeline for crawling PDFs from the Web and transforming their contents into structured data using [AWS Textract](https://aws.amazon.com/textract/). Built with AWS CDK + TypeScript
+:mag: Data pipeline for crawling PDFs from the Web and transforming their contents into structured data using [AWS Textract](https://aws.amazon.com/textract/). Built with AWS CDK + TypeScript.
+
+This is an example data pipeline that illustrates one possible approach for large-scale serverless PDF processing - it should serve as a good foundation to modify for your own purposes.
 
 ![Example Extension Popup](https://i.imgur.com/3F89JQK.png "Example Extension Popup")
 
