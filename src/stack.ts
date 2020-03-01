@@ -38,7 +38,6 @@ export class PdfTextractPipeline extends cdk.Stack {
     snsTopic.grantPublish(textractServiceRole);
 
     // Provisions S3 bucket for downloaded PDFs
-    // TODO - setup logging for S3 bucket
     // Doc: https://docs.aws.amazon.com/cdk/api/latest/docs/aws-s3-readme.html#logging-configuration
     const downloadsBucket: s3.Bucket = new s3.Bucket(
       this,
@@ -115,7 +114,6 @@ export class PdfTextractPipeline extends cdk.Stack {
         handler: "lambda.handler",
         runtime: lambda.Runtime.NODEJS_10_X,
         timeout: cdk.Duration.seconds(300),
-        memorySize: 1024, // TODO - is this needed?
         environment: {
           TABLE_NAME: parsedPdfDataTable.tableName,
           PRIMARY_KEY: "itemId",
@@ -129,13 +127,10 @@ export class PdfTextractPipeline extends cdk.Stack {
     // Adds permissions for the sendTextractResultToDynamo read/write from parsedPdfDataTable + downloadsBucket
     parsedPdfDataTable.grantReadWriteData(sendTextractResultToDynamo);
     downloadsBucket.grantReadWrite(sendTextractResultToDynamo);
-
-    // TODO - try this too...
-    // QUESTION - can this be removed?
     sendTextractResultToDynamo.addEventSource(new SnsEventSource(snsTopic));
     sendTextractResultToDynamo.addToRolePolicy(policyStatement);
 
-    // TODO - test this approach...
+    // Add "textract:*" actions to sendTextractResultToDynamo lambda
     sendTextractResultToDynamo.addToRolePolicy(
       new iam.PolicyStatement({
         actions: ["textract:*"],
@@ -168,7 +163,6 @@ export class PdfTextractPipeline extends cdk.Stack {
 
     // Add DynamoDB stream event source to downloadPdfToS3Lambda
     // Invoked once-per-document
-    // TODO - add documentation link
     downloadPdfToS3Lambda.addEventSource(
       new DynamoEventSource(dynamoTable, {
         startingPosition: lambda.StartingPosition.TRIM_HORIZON,
@@ -206,7 +200,7 @@ export class PdfTextractPipeline extends cdk.Stack {
       schedule: events.Schedule.expression("rate(720 minutes)")
     });
 
-    // TODO - annotate this
+    // Adds scrapePdfsFromWebsiteLambda as target for scheduled rule
     rule.addTarget(new targets.LambdaFunction(scrapePdfsFromWebsiteLambda));
   }
 }

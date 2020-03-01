@@ -10,7 +10,6 @@ const PRIMARY_KEY = process.env.PRIMARY_KEY || "";
 const fetchUrl =
   "http://ogccweblink.state.co.us/Results.aspx?DocName=WELL%20ABANDONMENT%20REPORT%20(INTENT)&DocDate=02/03/2020";
 
-// TODO - replace any with correct type
 export const handler = async (
   event: any = {},
   context: any = {}

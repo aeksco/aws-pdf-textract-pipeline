@@ -46,19 +46,25 @@ const S3_BUCKET_NAME = process.env.S3_BUCKET_NAME || "";
 // // // //
 
 // Downloads a file from a URL and writes it to `./tmp/filename
-// TODO - should have error handler + error logging
 function downloadFile(url: string, dest: string): Promise<any> {
   return new Promise(resolve => {
     const file = fs.createWriteStream(dest);
     console.log("created file write stream: " + dest);
 
+    // Fetches URL using HTTP
     http.get(url, response => {
+      // Logs downloaded file message
       console.log("downloaded file: " + url);
 
+      // Pipes response to file
       response.pipe(file);
-      file.on("finish", function() {
-        console.log("wrote to file");
 
+      // Defines callback for stream "finish" event
+      file.on("finish", function() {
+        // Logs wrote-to-file message
+        console.log("wrote to file: " + dest);
+
+        // Closes file stream and resolves promise
         file.close();
         resolve();
       });
@@ -111,7 +117,6 @@ export const handler = async (event: any = {}): Promise<any> => {
     .send((err, data) => {
       console.log(err, data);
       // Logs error
-      // TODO - wire up proper error logging
       if (err) {
         console.log(`download-file --> ERROR`);
         console.log(err);
