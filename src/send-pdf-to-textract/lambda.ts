@@ -7,7 +7,7 @@ const S3_BUCKET_NAME = process.env.S3_BUCKET_NAME || "";
 // TOOD - replace `any` with correct event type
 export const handler = async (event: any = {}): Promise<any> => {
   // Logs starting message + event
-  console.log("ADD TO QUEUE");
+  console.log("send-pdf-to-textract -> start");
   console.log(JSON.stringify(event, null, 4));
 
   // Pulls filename from event
@@ -15,9 +15,11 @@ export const handler = async (event: any = {}): Promise<any> => {
 
   // Short-circuit if filename isn't defined
   if (!filename) {
-    console.log("ERROR - filename");
+    console.log("ERROR - no filename found in S3 event");
+    return;
   }
 
+  // Logs filename
   console.log("filename: " + filename);
 
   // Defines params for Textract API call
@@ -42,15 +44,20 @@ export const handler = async (event: any = {}): Promise<any> => {
   // Invoke Textract.startDocumentAnalysis
   await new Promise(resolve => {
     return textract.startDocumentAnalysis(params, function(err, data) {
-      console.log("START DOCUMENT TEXT DETECTION");
-      console.log("err");
+      // Logs error state
+      console.log("startDocumentAnalysis - err");
       console.log(err);
-      console.log("data");
+
+      // Logs success state
+      console.log("startDocumentAnalysis - data");
       console.log(data);
+
+      // Resolves with data
       resolve(data);
     });
   });
 
-  console.log("Function shut down");
+  // Logs shutdown message
+  console.log("send-pdf-to-textract -> shutdown");
   return;
 };

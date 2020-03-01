@@ -15,14 +15,10 @@ export const handler = async (
   event: any = {},
   context: any = {}
 ): Promise<any> => {
-  // Log statement to ensure it's loading
-  console.log("RUN LAMBDA!");
-  console.log(TABLE_NAME);
-  console.log(PRIMARY_KEY);
+  // Log start message
+  console.log("scrape-pdfs-from-website -> start");
 
-  // // // //
-  // // // //
-
+  // Define
   let result = null;
   let browser = null;
 
@@ -45,19 +41,18 @@ export const handler = async (
 
     // Gets ALL urls
     // @ts-ignore
-    let allHrefs = await page.$$eval("a", as => as.map(a => a.href));
+    let allHrefs = await page.$$eval("a", as => as.map((a: Element) => a.href));
 
     // Gets Download URLS
-    let downloadHrefs = allHrefs.filter(a => a.includes("DownloadDocumentPDF"));
+    let downloadUrls = allHrefs.filter(a => a.includes("DownloadDocumentPDF"));
 
-    // // Logs downloadHrefs
-    console.log("downloadHrefs");
-    console.log(downloadHrefs);
+    // Logs downloadUrls
+    console.log("downloadUrls");
+    console.log(downloadUrls);
 
-    // // // //
-    // DYNAMO DB CODE
+    // Insert all downloadURLs into DynamoDO
     await Promise.all(
-      downloadHrefs.map(
+      downloadUrls.map(
         (downloadUrl: string): Promise<any> => {
           // Pulls documentId from downloadUrl
           const documentId: string = String(
@@ -89,6 +84,7 @@ export const handler = async (
   } catch (error) {
     return context.fail(error);
   } finally {
+    // Close the puppeteer browser
     if (browser !== null) {
       await browser.close();
     }
@@ -96,5 +92,3 @@ export const handler = async (
 
   return context.succeed(result);
 };
-
-// // // //
