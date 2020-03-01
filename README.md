@@ -17,36 +17,36 @@ cdk bootstrap
 cdk deploy
 ```
 
-**Overview**
+### Overview
 
 The following is an overview of each process performed by this CDK stack.
 
-**1. Scrape PDF download URLs from a website**
+1. **Scrape PDF download URLs from a website**
 
-Scraping data from the [COGCC]() website.
+   Scraping data from the [COGCC]() website.
 
-2. Store PDF download URL in DynamoDB
+2. **Store PDF download URL in DynamoDB**
 
    ![Example Extension Popup](https://i.imgur.com/bmFJGDW.png "Example Extension Popup")
 
-3. Download the PDF to S3
+3. **Download the PDF to S3**
 
    A lambda fires off when a new PDF download URL has been created in DynamoDB.
 
-4. Process the PDF with AWS Textract
+4. **Process the PDF with AWS Textract**
 
    Another lambda fires off when a PDF has been downloaded to the S3 bucket.
 
-5. Process the AWS Textract results
+5. **Process the AWS Textract results**
 
    When an SNS event is detected from AWS Textract, a lambda is fired off to process the result.
 
-6. Save the processed Textract result to DynamoDB.
+6. **Save the processed Textract result to DynamoDB.**
 
    After the full result is pruned down the the desired datastructure, we save the data in DynamoDB.
    ![Example Extension Popup](https://i.imgur.com/HkTtLmi.png "Example Extension Popup")
 
-**Scripts**
+### Scripts
 
 - `yarn install` - installs dependencies
 - `yarn build` - builds the production-ready CDK Stack
