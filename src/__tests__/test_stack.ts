@@ -1,15 +1,18 @@
 import { expect as expectCDK, countResources } from "@aws-cdk/assert";
 import * as cdk from "@aws-cdk/core";
-import { LambdaCronStack } from "../stack";
+import { PdfTextractPipeline } from "../stack";
 
 // // // //
 
-describe("LambdaCronStack", () => {
+describe("PdfTextractPipeline", () => {
   test("loads", () => {
     const app = new cdk.App();
 
     // Configures CDK stack
-    const stack: cdk.Stack = new LambdaCronStack(app, "LambdaCronStack");
+    const stack: cdk.Stack = new PdfTextractPipeline(
+      app,
+      "PdfTextractPipeline"
+    );
 
     // Checks stack resource count
     expectCDK(stack).to(countResources("AWS::DynamoDB::Table", 2));

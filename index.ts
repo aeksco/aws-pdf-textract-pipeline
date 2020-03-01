@@ -1,10 +1,11 @@
 import * as cdk from "@aws-cdk/core";
-import { LambdaCronStack } from "./src/stack";
+import { PdfTextractPipeline } from "./src/stack";
 
 // // // //
 
-// TODO - annotate this
+// Defines new CDK App
 const app = new cdk.App();
-// TODO - rename this
-new LambdaCronStack(app, "LambdaCronExample");
+
+// Instantiates the PdfTextractPipeline
+new PdfTextractPipeline(app, "PdfTextractPipeline");
 app.synth();

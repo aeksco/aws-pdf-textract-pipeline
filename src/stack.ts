@@ -14,7 +14,7 @@ import {
 
 // // // //
 
-export class LambdaCronStack extends cdk.Stack {
+export class PdfTextractPipeline extends cdk.Stack {
   // constructor(app: cdk.App, id: string) {
   constructor(scope: cdk.Construct, id: string) {
     super(scope, id);

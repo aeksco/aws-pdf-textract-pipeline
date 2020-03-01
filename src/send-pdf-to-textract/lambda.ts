@@ -8,10 +8,6 @@ const S3_BUCKET_NAME = process.env.S3_BUCKET_NAME || "";
 export const handler = async (event: any = {}): Promise<any> => {
   // Logs starting message + event
   console.log("ADD TO QUEUE");
-  console.log("SNS_TOPIC_ARN");
-  console.log(SNS_TOPIC_ARN);
-  console.log("SNS_ROLE_ARN");
-  console.log(SNS_ROLE_ARN);
   console.log(JSON.stringify(event, null, 4));
 
   // Pulls filename from event
