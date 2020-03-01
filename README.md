@@ -21,9 +21,9 @@ cdk deploy
 
 The following is an overview of each process performed by this CDK stack.
 
-1. Scrape PDF download URLs from a website
+**1. Scrape PDF download URLs from a website**
 
-   Scraping data from the [COGCC]() website.
+Scraping data from the [COGCC]() website.
 
 2. Store PDF download URL in DynamoDB
 
