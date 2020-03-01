@@ -73,11 +73,10 @@ The following is an overview of each process performed by this CDK stack.
 
 **Additional Resources**
 
-- CDK Documentation
-- Puppeteer Documentation
-- Puppeteer Lambda
-- CDK TypeScript Reference
-- CDK Assertion Package
-- Textract Pricing Chart
-- CDK Resources
+- [CDK API Reference](https://docs.aws.amazon.com/cdk/api/latest/docs/aws-construct-library.html)
+- [Puppeteer](https://github.com/puppeteer/puppeteer)
+- [Puppeteer Lambda](https://github.com/alixaxel/chrome-aws-lambda)
+- [CDK TypeScript Reference](https://docs.aws.amazon.com/cdk/api/latest/typescript/api/index.html)
+- [CDK Assertion Package](https://github.com/aws/aws-cdk/tree/master/packages/%40aws-cdk/assert)
+- [Textract Pricing Chart](https://aws.amazon.com/textract/pricing/)
 - [awesome-cdk repo](https://github.com/eladb/awesome-cdk)
