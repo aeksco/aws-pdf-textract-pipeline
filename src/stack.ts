@@ -34,7 +34,7 @@ export class PdfTextractPipeline extends cdk.Stack {
     policyStatement.addResources("*");
     textractServiceRole.addToPolicy(policyStatement);
 
-    // TODO - annotate this
+    // Grant the textractServiceRole the ability to publish to snsTopic
     snsTopic.grantPublish(textractServiceRole);
 
     // Provisions S3 bucket for downloaded PDFs
@@ -200,11 +200,10 @@ export class PdfTextractPipeline extends cdk.Stack {
     // Adds permissions for the scrapePdfsFromWebsiteLambda to read/write from dynamoTable
     dynamoTable.grantReadWriteData(scrapePdfsFromWebsiteLambda);
 
-    // Run `scrape-pdfs-from-website` every day at 6PM UTC
+    // Run `scrape-pdfs-from-website` every 12 hours
     // See https://docs.aws.amazon.com/lambda/latest/dg/tutorial-scheduled-events-schedule-expressions.html
     const rule = new events.Rule(this, "Rule", {
-      // schedule: events.Schedule.expression("cron(0 18 ? * MON-FRI *)")
-      schedule: events.Schedule.expression("rate(2 minutes)")
+      schedule: events.Schedule.expression("rate(720 minutes)")
     });
 
     // TODO - annotate this
