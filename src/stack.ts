@@ -50,8 +50,8 @@ export class PdfTextractPipeline extends cdk.Stack {
     // the new table, and it will remain in your account until manually deleted. By setting the policy to
     // DESTROY, cdk destroy will delete the table (even if it has data in it)
 
-    // Defines dynamoTable for PDF Download URLs
-    const dynamoTable = new dynamodb.Table(this, "cogcc-pdf-urls", {
+    // Defines pdfUrlsTable for PDF Download URLs
+    const pdfUrlsTable = new dynamodb.Table(this, "cogcc-pdf-urls", {
       partitionKey: {
         name: "itemId",
         type: dynamodb.AttributeType.STRING
@@ -75,32 +75,44 @@ export class PdfTextractPipeline extends cdk.Stack {
     // // // //
     // Provisions send-pdf-to-textract lambda
 
-    // addToQueue Lambda
-    const addToQueue = new lambda.Function(this, "addToQueueLambdaFunction", {
-      code: new lambda.AssetCode("src/send-pdf-to-textract"),
-      handler: "lambda.handler",
-      runtime: lambda.Runtime.NODEJS_10_X,
-      environment: {
-        TABLE_NAME: parsedPdfDataTable.tableName,
-        PRIMARY_KEY: "itemId",
-        S3_BUCKET_NAME: downloadsBucket.bucketName,
-        SNS_TOPIC_ARN: snsTopic.topicArn,
-        SNS_ROLE_ARN: textractServiceRole.roleArn
+    // sendPdfToTextract Lambda
+    const sendPdfToTextract = new lambda.Function(
+      this,
+      "sendPdfToTextractFunction",
+      {
+        code: new lambda.AssetCode("src/send-pdf-to-textract"),
+        handler: "lambda.handler",
+        runtime: lambda.Runtime.NODEJS_10_X,
+        environment: {
+          TABLE_NAME: parsedPdfDataTable.tableName,
+          PRIMARY_KEY: "itemId",
+          S3_BUCKET_NAME: downloadsBucket.bucketName,
+          SNS_TOPIC_ARN: snsTopic.topicArn,
+          SNS_ROLE_ARN: textractServiceRole.roleArn
+        }
       }
-    });
+    );
 
-    // Configure event source so the `addToQueue` is run each time a file is downloaded to S3
+    // Configure event source so the `sendPdfToTextract` is run each time a file is downloaded to S3
     // Doc: https://docs.aws.amazon.com/cdk/api/latest/docs/aws-lambda-event-sources-readme.html#s3
-    addToQueue.addEventSource(
+    sendPdfToTextract.addEventSource(
       new S3EventSource(downloadsBucket, {
         events: [s3.EventType.OBJECT_CREATED]
       })
     );
 
-    // Adds permissions for the addToQueue read/write from parsedPdfDataTable + downloadsBucket
-    snsTopic.grantPublish(addToQueue);
-    parsedPdfDataTable.grantReadWriteData(addToQueue);
-    downloadsBucket.grantReadWrite(addToQueue);
+    // Add "textract:*" actions to sendPdfToTextract lambda
+    sendPdfToTextract.addToRolePolicy(
+      new iam.PolicyStatement({
+        actions: ["textract:*"],
+        resources: ["*"]
+      })
+    );
+
+    // Adds permissions for the sendPdfToTextract read/write from parsedPdfDataTable + downloadsBucket
+    snsTopic.grantPublish(sendPdfToTextract);
+    parsedPdfDataTable.grantReadWriteData(sendPdfToTextract);
+    downloadsBucket.grantReadWrite(sendPdfToTextract);
 
     // // // //
     // Provisions send-textract-result-to-dynamo lambda
@@ -130,14 +142,6 @@ export class PdfTextractPipeline extends cdk.Stack {
     sendTextractResultToDynamo.addEventSource(new SnsEventSource(snsTopic));
     sendTextractResultToDynamo.addToRolePolicy(policyStatement);
 
-    // Add "textract:*" actions to sendTextractResultToDynamo lambda
-    sendTextractResultToDynamo.addToRolePolicy(
-      new iam.PolicyStatement({
-        actions: ["textract:*"],
-        resources: ["*"]
-      })
-    );
-
     // // // //
     // Provisions download-pdf-to-s3 lambda
 
@@ -150,21 +154,21 @@ export class PdfTextractPipeline extends cdk.Stack {
         handler: "lambda.handler",
         runtime: lambda.Runtime.NODEJS_10_X,
         environment: {
-          TABLE_NAME: dynamoTable.tableName,
+          TABLE_NAME: pdfUrlsTable.tableName,
           S3_BUCKET_NAME: downloadsBucket.bucketName,
           PRIMARY_KEY: "itemId"
         }
       }
     );
 
-    // Adds permissions for the lambdaFn to read/write from dynamoTable + downloadsBucket
-    dynamoTable.grantReadWriteData(downloadPdfToS3Lambda);
+    // Adds permissions for the lambdaFn to read/write from pdfUrlsTable + downloadsBucket
+    pdfUrlsTable.grantReadWriteData(downloadPdfToS3Lambda);
     downloadsBucket.grantReadWrite(downloadPdfToS3Lambda);
 
     // Add DynamoDB stream event source to downloadPdfToS3Lambda
     // Invoked once-per-document
     downloadPdfToS3Lambda.addEventSource(
-      new DynamoEventSource(dynamoTable, {
+      new DynamoEventSource(pdfUrlsTable, {
         startingPosition: lambda.StartingPosition.TRIM_HORIZON,
         batchSize: 1
       })
@@ -185,14 +189,14 @@ export class PdfTextractPipeline extends cdk.Stack {
         timeout: cdk.Duration.seconds(300),
         memorySize: 1024,
         environment: {
-          TABLE_NAME: dynamoTable.tableName,
+          TABLE_NAME: pdfUrlsTable.tableName,
           PRIMARY_KEY: "itemId"
         }
       }
     );
 
-    // Adds permissions for the scrapePdfsFromWebsiteLambda to read/write from dynamoTable
-    dynamoTable.grantReadWriteData(scrapePdfsFromWebsiteLambda);
+    // Adds permissions for the scrapePdfsFromWebsiteLambda to read/write from pdfUrlsTable
+    pdfUrlsTable.grantReadWriteData(scrapePdfsFromWebsiteLambda);
 
     // Run `scrape-pdfs-from-website` every 12 hours
     // See https://docs.aws.amazon.com/lambda/latest/dg/tutorial-scheduled-events-schedule-expressions.html

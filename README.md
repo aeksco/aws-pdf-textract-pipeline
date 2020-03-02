@@ -58,6 +58,8 @@ The following is an overview of each process performed by this CDK stack.
 
 **Notes**
 
+- If a PDF download URL has already been added to the `pdfUrlsTable` DynamoDB table, the pipeline will not re-execute for the PDF.
+
 - Includes tests with Jest.
 
 - Recommended to use `Visual Studio Code` with the `Format on Save` setting turned on.

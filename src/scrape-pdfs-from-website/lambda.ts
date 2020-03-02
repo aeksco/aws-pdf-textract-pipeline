@@ -6,9 +6,20 @@ const PRIMARY_KEY = process.env.PRIMARY_KEY || "";
 
 // // // //
 
-// The URL from which the PDF download URLs are being fetched
-const fetchUrl =
-  "http://ogccweblink.state.co.us/Results.aspx?DocName=WELL%20ABANDONMENT%20REPORT%20(INTENT)&DocDate=02/03/2020";
+/**
+ * buildFetchUrl
+ * Builds a url to the page with all the PDF download URLs
+ */
+function buildFetchUrl(): string {
+  // The URL from which the PDF download URLs are being fetched
+  const baseUrl =
+    "http://ogccweblink.state.co.us/Results.aspx?DocName=WELL%20ABANDONMENT%20REPORT%20(INTENT)&DocDate=02/03/2020";
+
+  // Returns base URL with date param
+  return baseUrl;
+}
+
+// // // //
 
 export const handler = async (
   event: any = {},
@@ -16,6 +27,7 @@ export const handler = async (
 ): Promise<any> => {
   // Log start message
   console.log("scrape-pdfs-from-website -> start");
+  console.log(event);
 
   // Define
   let result = null;
@@ -33,8 +45,12 @@ export const handler = async (
     // Defines page
     let page = await browser.newPage();
 
+    // Gets fetchUrl for puppeteer
+    // This is the page with all the PDF download URLs
+    const fetchUrl: string = buildFetchUrl();
+
     // Navigate to page, wait until dom content is loaded
-    await page.goto(event.url || fetchUrl, {
+    await page.goto(fetchUrl, {
       waitUntil: "domcontentloaded"
     });
 
@@ -77,9 +93,6 @@ export const handler = async (
         }
       )
     );
-
-    // Logs "DONE" statement
-    console.log("DONE");
   } catch (error) {
     return context.fail(error);
   } finally {
@@ -89,5 +102,7 @@ export const handler = async (
     }
   }
 
+  // Logs "shutdown" statement
+  console.log("scrape-pdfs-from-website -> shutdown");
   return context.succeed(result);
 };
