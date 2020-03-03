@@ -25,7 +25,7 @@ The following is an overview of each process performed by this CDK stack.
 
 1. **Scrape PDF download URLs from a website**
 
-   Scraping data from the [COGCC]() website.
+   Scraping data from the [COGCC](https://cogcc.state.co.us/) website.
 
 2. **Store PDF download URL in DynamoDB**
 
@@ -84,3 +84,9 @@ The following is an overview of each process performed by this CDK stack.
 - [CDK Assertion Package](https://github.com/aws/aws-cdk/tree/master/packages/%40aws-cdk/assert)
 - [Textract Pricing Chart](https://aws.amazon.com/textract/pricing/)
 - [awesome-cdk repo](https://github.com/eladb/awesome-cdk)
+
+**License**
+
+Opens source under the MIT License.
+
+Built with :heart: by [aeksco](https://twitter.com/aeksco)
