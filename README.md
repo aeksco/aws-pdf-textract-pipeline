@@ -58,6 +58,8 @@ The following is an overview of each process performed by this CDK stack.
 
 **Notes**
 
+- **Warning** - the `AnalyzeDocument` process from AWS Textract costs \$50 per 1,000 PDF pages. Be careful when deploying this CDK stack as you could unintentionally rack up an expensive AWS bill quickly if you're not paying attention.
+
 - If a PDF download URL has already been added to the `pdfUrlsTable` DynamoDB table, the pipeline will not re-execute for the PDF.
 
 - Includes tests with Jest.
@@ -90,3 +92,9 @@ The following is an overview of each process performed by this CDK stack.
 Opens source under the MIT License.
 
 Built with :heart: by [aeksco](https://twitter.com/aeksco)
+
+<!-- Reddit Threads -->
+<!-- https://www.reddit.com/r/aws/comments/fbwtr2/example_serverless_data_pipeline_for_crawling/ -->
+<!-- https://www.reddit.com/r/serverless/comments/fbwsak/serverless_data_pipeline_for_crawling_pdfs_from/ -->
+<!-- https://www.reddit.com/r/typescript/comments/fcy30x/example_serverless_data_pipeline_for_crawling/ -->
+<!-- https://www.reddit.com/r/webdev/comments/fd65r2/example_serverless_data_pipeline_for_crawling/ -->
