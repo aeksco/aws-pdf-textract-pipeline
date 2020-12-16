@@ -1,4 +1,5 @@
-# aws-pdf-textract-pipeline
+# aws-pdf-textract-pipeline [![Mentioned in Awesome CDK](https://awesome.re/mentioned-badge.svg)](https://github.com/kolomied/awesome-cdk)
+
 
 :mag: Data pipeline for crawling PDFs from the Web and transforming their contents into structured data using [AWS Textract](https://aws.amazon.com/textract/). Built with AWS CDK + TypeScript.
 
