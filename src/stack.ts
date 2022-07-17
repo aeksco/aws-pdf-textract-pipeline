@@ -1,22 +1,22 @@
-import * as s3 from "@aws-cdk/aws-s3";
-import * as events from "@aws-cdk/aws-events";
-import * as dynamodb from "@aws-cdk/aws-dynamodb";
-import * as targets from "@aws-cdk/aws-events-targets";
-import * as lambda from "@aws-cdk/aws-lambda";
-import * as cdk from "@aws-cdk/core";
-import * as iam from "@aws-cdk/aws-iam";
-import * as sns from "@aws-cdk/aws-sns";
+import * as s3 from "aws-cdk-lib/aws-s3";
+import * as events from "aws-cdk-lib/aws-events";
+import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
+import * as targets from "aws-cdk-lib/aws-events-targets";
+import * as lambda from "aws-cdk-lib/aws-lambda";
+import * as cdk from "aws-cdk-lib/core";
+import * as iam from "aws-cdk-lib/aws-iam";
+import * as sns from "aws-cdk-lib/aws-sns";
 import {
   DynamoEventSource,
   S3EventSource,
-  SnsEventSource
-} from "@aws-cdk/aws-lambda-event-sources";
+  SnsEventSource,
+} from "aws-cdk-lib/aws-lambda-event-sources";
+import { Construct } from "constructs";
 
 // // // //
 
 export class PdfTextractPipeline extends cdk.Stack {
-  // constructor(app: cdk.App, id: string) {
-  constructor(scope: cdk.Construct, id: string) {
+  constructor(scope: Construct, id: string) {
     super(scope, id);
 
     // Provisions SNS topic for Textract asynchronous AnalyzeDocument process
@@ -24,7 +24,7 @@ export class PdfTextractPipeline extends cdk.Stack {
 
     // Provisions IAM Role for Textract Service
     const textractServiceRole = new iam.Role(this, "TextractServiceRole", {
-      assumedBy: new iam.ServicePrincipal("textract.amazonaws.com")
+      assumedBy: new iam.ServicePrincipal("textract.amazonaws.com"),
     });
 
     // Provisions PolicyStatement for textractServiceRole
@@ -54,22 +54,22 @@ export class PdfTextractPipeline extends cdk.Stack {
     const pdfUrlsTable = new dynamodb.Table(this, "cogcc-pdf-urls", {
       partitionKey: {
         name: "itemId",
-        type: dynamodb.AttributeType.STRING
+        type: dynamodb.AttributeType.STRING,
       },
       stream: dynamodb.StreamViewType.NEW_IMAGE,
       tableName: "cogcc-pdf-urls",
-      removalPolicy: cdk.RemovalPolicy.DESTROY // NOTE - This removalPolicy is NOT recommended for production code
+      removalPolicy: cdk.RemovalPolicy.DESTROY, // NOTE - This removalPolicy is NOT recommended for production code
     });
 
     // Defines DyanmoDB table for parsed PDF data
     const parsedPdfDataTable = new dynamodb.Table(this, "cogcc-pdf-data", {
       partitionKey: {
         name: "itemId",
-        type: dynamodb.AttributeType.STRING
+        type: dynamodb.AttributeType.STRING,
       },
       stream: dynamodb.StreamViewType.NEW_IMAGE,
       tableName: "cogcc-pdf-data",
-      removalPolicy: cdk.RemovalPolicy.DESTROY // NOTE - This removalPolicy is NOT recommended for production code
+      removalPolicy: cdk.RemovalPolicy.DESTROY, // NOTE - This removalPolicy is NOT recommended for production code
     });
 
     // // // //
@@ -88,8 +88,8 @@ export class PdfTextractPipeline extends cdk.Stack {
           PRIMARY_KEY: "itemId",
           S3_BUCKET_NAME: downloadsBucket.bucketName,
           SNS_TOPIC_ARN: snsTopic.topicArn,
-          SNS_ROLE_ARN: textractServiceRole.roleArn
-        }
+          SNS_ROLE_ARN: textractServiceRole.roleArn,
+        },
       }
     );
 
@@ -97,7 +97,7 @@ export class PdfTextractPipeline extends cdk.Stack {
     // Doc: https://docs.aws.amazon.com/cdk/api/latest/docs/aws-lambda-event-sources-readme.html#s3
     sendPdfToTextract.addEventSource(
       new S3EventSource(downloadsBucket, {
-        events: [s3.EventType.OBJECT_CREATED]
+        events: [s3.EventType.OBJECT_CREATED],
       })
     );
 
@@ -105,7 +105,7 @@ export class PdfTextractPipeline extends cdk.Stack {
     sendPdfToTextract.addToRolePolicy(
       new iam.PolicyStatement({
         actions: ["textract:*"],
-        resources: ["*"]
+        resources: ["*"],
       })
     );
 
@@ -131,8 +131,8 @@ export class PdfTextractPipeline extends cdk.Stack {
           PRIMARY_KEY: "itemId",
           SNS_TOPIC_ARN: snsTopic.topicArn,
           SNS_ROLE_ARN: textractServiceRole.roleArn,
-          S3_BUCKET_NAME: downloadsBucket.bucketName
-        }
+          S3_BUCKET_NAME: downloadsBucket.bucketName,
+        },
       }
     );
 
@@ -156,8 +156,8 @@ export class PdfTextractPipeline extends cdk.Stack {
         environment: {
           TABLE_NAME: pdfUrlsTable.tableName,
           S3_BUCKET_NAME: downloadsBucket.bucketName,
-          PRIMARY_KEY: "itemId"
-        }
+          PRIMARY_KEY: "itemId",
+        },
       }
     );
 
@@ -170,7 +170,7 @@ export class PdfTextractPipeline extends cdk.Stack {
     downloadPdfToS3Lambda.addEventSource(
       new DynamoEventSource(pdfUrlsTable, {
         startingPosition: lambda.StartingPosition.TRIM_HORIZON,
-        batchSize: 1
+        batchSize: 1,
       })
     );
 
@@ -190,8 +190,8 @@ export class PdfTextractPipeline extends cdk.Stack {
         memorySize: 1024,
         environment: {
           TABLE_NAME: pdfUrlsTable.tableName,
-          PRIMARY_KEY: "itemId"
-        }
+          PRIMARY_KEY: "itemId",
+        },
       }
     );
 
@@ -201,7 +201,7 @@ export class PdfTextractPipeline extends cdk.Stack {
     // Run `scrape-pdfs-from-website` every 12 hours
     // See https://docs.aws.amazon.com/lambda/latest/dg/tutorial-scheduled-events-schedule-expressions.html
     const rule = new events.Rule(this, "Rule", {
-      schedule: events.Schedule.expression("rate(720 minutes)")
+      schedule: events.Schedule.expression("rate(720 minutes)"),
     });
 
     // Adds scrapePdfsFromWebsiteLambda as target for scheduled rule

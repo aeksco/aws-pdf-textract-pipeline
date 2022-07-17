@@ -11,22 +11,17 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@aws-cdk/assert": "^1.20.0",
-    "@types/node": "^10.17.0",
-    "@types/jest": "^24.0.25",
-    "jest": "^25.1.0",
-    "ts-jest": "^24.3.0",
-    "typescript": "~3.7.2"
+    "@aws-cdk/assert": "^2.32.1",
+    "@types/jest": "^26.0.10",
+    "@types/node": "^10.17.27",
+    "constructs": "^10.1.48",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.2.0",
+    "typescript": "~3.9.7"
   },
   "dependencies": {
-    "@aws-cdk/aws-dynamodb": "^1.20.0",
-    "@aws-cdk/aws-events": "^1.20.0",
-    "@aws-cdk/aws-events-targets": "^1.20.0",
-    "@aws-cdk/aws-iam": "^1.20.0",
-    "@aws-cdk/aws-lambda": "^1.20.0",
-    "@aws-cdk/aws-lambda-event-sources": "^1.20.0",
-    "@aws-cdk/core": "^1.20.0",
     "@types/puppeteer": "^2.0.0",
+    "aws-cdk-lib": "^2.32.1",
     "puppeteer-lambda": "^1.1.3"
   }
 }

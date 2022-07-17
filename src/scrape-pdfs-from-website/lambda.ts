@@ -24,7 +24,7 @@ function buildFetchUrl(): string {
 export const handler = async (
   event: any = {},
   context: any = {}
-): Promise<any> => {
+): Promise<void> => {
   // Log start message
   console.log("scrape-pdfs-from-website -> start");
   console.log(event);
@@ -57,8 +57,9 @@ export const handler = async (
     // Gets ALL urls
     // @ts-ignore
     let allHrefs = await page.$$eval("a", as => as.map((a: Element) => a.href));
-
+    
     // Gets Download URLS
+    // @ts-ignore
     let downloadUrls = allHrefs.filter(a => a.includes("DownloadDocumentPDF"));
 
     // Logs downloadUrls
