@@ -6,7 +6,7 @@
 //       "eventName": "INSERT",
 //       "eventVersion": "1.1",
 //       "eventSource": "aws:dynamodb",
-//       "awsRegion": "us-west-2",
+//       "awsRegion": "us-east-1",
 //       "dynamodb": {
 //         "ApproximateCreationDateTime": 1582405136,
 //         "Keys": {
@@ -32,7 +32,7 @@
 //         "SizeBytes": 169,
 //         "StreamViewType": "NEW_IMAGE"
 //       },
-//       "eventSourceARN": "arn:aws:dynamodb:us-west-2:839811712080:table/cogcc-pdf-urls/stream/2020-02-22T20:53:55.247"
+//       "eventSourceARN": "arn:aws:dynamodb:us-east-1:839811712080:table/cogcc-pdf-urls/stream/2020-02-22T20:53:55.247"
 //     }
 //   ]
 // }

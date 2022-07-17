@@ -1,5 +1,5 @@
 import * as AWS from "aws-sdk";
-const textract = new AWS.Textract({ region: "us-west-2" });
+const textract = new AWS.Textract({ region: process.env.CDK_DEFAULT_REGION });
 const SNS_TOPIC_ARN = process.env.SNS_TOPIC_ARN || "";
 const SNS_ROLE_ARN = process.env.SNS_ROLE_ARN || "";
 const S3_BUCKET_NAME = process.env.S3_BUCKET_NAME || "";

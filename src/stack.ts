@@ -3,9 +3,9 @@ import * as events from "aws-cdk-lib/aws-events";
 import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
 import * as targets from "aws-cdk-lib/aws-events-targets";
 import * as lambda from "aws-cdk-lib/aws-lambda";
-import * as cdk from "aws-cdk-lib/core";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as sns from "aws-cdk-lib/aws-sns";
+import { Duration, RemovalPolicy, Stack } from "aws-cdk-lib";
 import {
   DynamoEventSource,
   S3EventSource,
@@ -15,7 +15,7 @@ import { Construct } from "constructs";
 
 // // // //
 
-export class PdfTextractPipeline extends cdk.Stack {
+export class PdfTextractPipeline extends Stack {
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
@@ -58,7 +58,7 @@ export class PdfTextractPipeline extends cdk.Stack {
       },
       stream: dynamodb.StreamViewType.NEW_IMAGE,
       tableName: "cogcc-pdf-urls",
-      removalPolicy: cdk.RemovalPolicy.DESTROY, // NOTE - This removalPolicy is NOT recommended for production code
+      removalPolicy: RemovalPolicy.DESTROY, // NOTE - This removalPolicy is NOT recommended for production code
     });
 
     // Defines DyanmoDB table for parsed PDF data
@@ -69,7 +69,7 @@ export class PdfTextractPipeline extends cdk.Stack {
       },
       stream: dynamodb.StreamViewType.NEW_IMAGE,
       tableName: "cogcc-pdf-data",
-      removalPolicy: cdk.RemovalPolicy.DESTROY, // NOTE - This removalPolicy is NOT recommended for production code
+      removalPolicy: RemovalPolicy.DESTROY, // NOTE - This removalPolicy is NOT recommended for production code
     });
 
     // // // //
@@ -82,7 +82,7 @@ export class PdfTextractPipeline extends cdk.Stack {
       {
         code: new lambda.AssetCode("src/send-pdf-to-textract"),
         handler: "lambda.handler",
-        runtime: lambda.Runtime.NODEJS_10_X,
+        runtime: lambda.Runtime.NODEJS_12_X,
         environment: {
           TABLE_NAME: parsedPdfDataTable.tableName,
           PRIMARY_KEY: "itemId",
@@ -124,8 +124,8 @@ export class PdfTextractPipeline extends cdk.Stack {
       {
         code: new lambda.AssetCode("src/send-textract-result-to-dynamo"),
         handler: "lambda.handler",
-        runtime: lambda.Runtime.NODEJS_10_X,
-        timeout: cdk.Duration.seconds(300),
+        runtime: lambda.Runtime.NODEJS_12_X,
+        timeout: Duration.seconds(300),
         environment: {
           TABLE_NAME: parsedPdfDataTable.tableName,
           PRIMARY_KEY: "itemId",
@@ -152,7 +152,7 @@ export class PdfTextractPipeline extends cdk.Stack {
       {
         code: new lambda.AssetCode("src/download-pdf-to-s3"),
         handler: "lambda.handler",
-        runtime: lambda.Runtime.NODEJS_10_X,
+        runtime: lambda.Runtime.NODEJS_12_X,
         environment: {
           TABLE_NAME: pdfUrlsTable.tableName,
           S3_BUCKET_NAME: downloadsBucket.bucketName,
@@ -185,8 +185,8 @@ export class PdfTextractPipeline extends cdk.Stack {
       {
         code: new lambda.AssetCode("src/scrape-pdfs-from-website"),
         handler: "lambda.handler",
-        runtime: lambda.Runtime.NODEJS_10_X,
-        timeout: cdk.Duration.seconds(300),
+        runtime: lambda.Runtime.NODEJS_12_X,
+        timeout: Duration.seconds(300),
         memorySize: 1024,
         environment: {
           TABLE_NAME: pdfUrlsTable.tableName,

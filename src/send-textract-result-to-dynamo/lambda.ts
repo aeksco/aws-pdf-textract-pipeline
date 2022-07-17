@@ -1,6 +1,6 @@
 import * as AWS from "aws-sdk";
 const db = new AWS.DynamoDB.DocumentClient();
-const textract = new AWS.Textract({ region: "us-west-2" });
+const textract = new AWS.Textract({ region: process.env.CDK_DEFAULT_REGION });
 const TABLE_NAME = process.env.TABLE_NAME || "";
 const PRIMARY_KEY = process.env.PRIMARY_KEY || "";
 
@@ -100,18 +100,18 @@ function getKvRelationship(keyMap: any, valueMap: any, blockMap: any) {
  *     {
  *       "EventSource": "aws:sns",
  *       "EventVersion": "1.0",
- *       "EventSubscriptionArn": "arn:aws:sns:us-west-2:839811712080:LambdaCronExample-MyTopic86869434-GNU4OYHJJK2B:2835b150-7b7c-4701-b345-1a26aa997ba0",
+ *       "EventSubscriptionArn": "arn:aws:sns:us-east-1:839811712080:LambdaCronExample-MyTopic86869434-GNU4OYHJJK2B:2835b150-7b7c-4701-b345-1a26aa997ba0",
  *       "Sns": {
  *         "Type": "Notification",
  *         "MessageId": "a0fcdb52-33c5-5e75-a29d-8d9f16c6efa0",
- *         "TopicArn": "arn:aws:sns:us-west-2:839811712080:LambdaCronExample-MyTopic86869434-GNU4OYHJJK2B",
+ *         "TopicArn": "arn:aws:sns:us-east-1:839811712080:LambdaCronExample-MyTopic86869434-GNU4OYHJJK2B",
  *         "Subject": null,
  *         "Message": "{\"JobId\":\"8ace6713ef0f85fbd88294d4f50b5063ad08052f93da760e98da55668f3e1148\",\"Status\":\"SUCCEEDED\",\"API\":\"StartDocumentTextDetection\",\"Timestamp\":1582506691353,\"DocumentLocation\":{\"S3ObjectName\":\"5055255.pdf\",\"S3Bucket\":\"lambdacronexample-cogccpdfdownloadsbucket93b40e01-1kn95iu6zt174\"}}",
  *         "Timestamp": "2020-02-24T01:11:31.395Z",
  *         "SignatureVersion": "1",
  *         "Signature": "drLfHmCEegFSc4oLYO/5y8ouKkHQLEsDo2l9tFFFtUGTUcbnIhFHYvQfbTND9BxE8a18kZ+nDBHuLlNhF67oVW0B2I8oy3svlYc6oeRUcgg6wF8TqlPpBwsG+UCnP81OIjtcb0VutqeYonlg8EDuXYK/pPumDsQ1NIkKjfwncdLPJLsgiuZZOkkRnvui5qftLSRkXtI1EXdwhIIXNyU3jK0MhEWZ/69K2mpZRSkb1jy2nkfQi1zlhktF4AfQpq4bMVxaBTq36Hb4FXXpzcPO2CLN2XchAIszd4vDAiEy9oSKJIW0IxqY5bazk70/lCva+AaMHoUAUazHHXamOZC4nw==",
- *         "SigningCertUrl": "https://sns.us-west-2.amazonaws.com/SimpleNotificationService-a86cb10b4e1f29c941702d737128f7b6.pem",
- *         "UnsubscribeUrl": "https://sns.us-west-2.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-west-2:839811712080:LambdaCronExample-MyTopic86869434-GNU4OYHJJK2B:2835b150-7b7c-4701-b345-1a26aa997ba0",
+ *         "SigningCertUrl": "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-a86cb10b4e1f29c941702d737128f7b6.pem",
+ *         "UnsubscribeUrl": "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:839811712080:LambdaCronExample-MyTopic86869434-GNU4OYHJJK2B:2835b150-7b7c-4701-b345-1a26aa997ba0",
  *         "MessageAttributes": {}
  *       }
  *     }
@@ -146,10 +146,10 @@ export const handler = async (event: any = {}): Promise<void> => {
   console.log(JobId);
 
   // Defines params for Textract.getDocumentAnalysis
-  const getDocumentAnalysisParams: any = {
-    JobId,
-    MaxResults: 1,
-  };
+  const getDocumentAnalysisParams: AWS.Textract.Types.GetDocumentAnalysisRequest =
+    {
+      JobId,
+    };
 
   // Logs getDocumentAnalysis params
   console.log("getDocumentAnalysisParams");
