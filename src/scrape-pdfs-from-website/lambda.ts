@@ -24,7 +24,7 @@ function buildFetchUrl(): string {
 export const handler = async (
   event: any = {},
   context: any = {}
-): Promise<any> => {
+): Promise<void> => {
   // Log start message
   console.log("scrape-pdfs-from-website -> start");
   console.log(event);
@@ -39,7 +39,7 @@ export const handler = async (
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
       executablePath: await chromium.executablePath,
-      headless: chromium.headless
+      headless: chromium.headless,
     });
 
     // Defines page
@@ -51,47 +51,52 @@ export const handler = async (
 
     // Navigate to page, wait until dom content is loaded
     await page.goto(fetchUrl, {
-      waitUntil: "domcontentloaded"
+      waitUntil: "domcontentloaded",
     });
 
     // Gets ALL urls
-    // @ts-ignore
-    let allHrefs = await page.$$eval("a", as => as.map((a: Element) => a.href));
+    let allHrefs = await page.$$eval("a", (as) =>
+      // @ts-ignore
+      as.map((a: Element) => a.href)
+    );
 
     // Gets Download URLS
-    let downloadUrls = allHrefs.filter(a => a.includes("DownloadDocumentPDF"));
+    // @ts-ignore
+    let downloadUrls = allHrefs.filter((a) =>
+      a.includes("DownloadDocumentPDF")
+    );
 
     // Logs downloadUrls
     console.log("downloadUrls");
     console.log(downloadUrls);
 
-    // Insert all downloadURLs into DynamoDO
+    // Insert downloadURLs into DynamoDO
+    // NOTE - we only insert the first 5 items into DynamoDB to curb
+    // unindended AWS spend associated with running Textract against PDFs.
     await Promise.all(
-      downloadUrls.map(
-        (downloadUrl: string): Promise<any> => {
-          // Pulls documentId from downloadUrl
-          const documentId: string = String(
-            downloadUrl.split("DocumentId=").pop()
-          );
+      downloadUrls.slice(0, 5).map((downloadUrl: string): Promise<any> => {
+        // Pulls documentId from downloadUrl
+        const documentId: string = String(
+          downloadUrl.split("DocumentId=").pop()
+        );
 
-          // Defines the item we're inserting into the database
-          const item: any = {
-            [PRIMARY_KEY]: documentId,
-            documentType: "WELL ABANDONMENT REPORT (INTENT)",
-            date: "02/03/2020",
-            downloadUrl: downloadUrl
-          };
+        // Defines the item we're inserting into the database
+        const item: any = {
+          [PRIMARY_KEY]: documentId,
+          documentType: "WELL ABANDONMENT REPORT (INTENT)",
+          date: "02/03/2020",
+          downloadUrl: downloadUrl,
+        };
 
-          // Defines the params for db.put
-          const params = {
-            TableName: TABLE_NAME,
-            Item: item
-          };
+        // Defines the params for db.put
+        const params = {
+          TableName: TABLE_NAME,
+          Item: item,
+        };
 
-          // Inserts the record into the DynamoDB table
-          return db.put(params).promise();
-        }
-      )
+        // Inserts the record into the DynamoDB table
+        return db.put(params).promise();
+      })
     );
   } catch (error) {
     return context.fail(error);

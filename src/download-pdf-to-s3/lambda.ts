@@ -6,7 +6,7 @@
 //       "eventName": "INSERT",
 //       "eventVersion": "1.1",
 //       "eventSource": "aws:dynamodb",
-//       "awsRegion": "us-west-2",
+//       "awsRegion": "us-east-1",
 //       "dynamodb": {
 //         "ApproximateCreationDateTime": 1582405136,
 //         "Keys": {
@@ -32,7 +32,7 @@
 //         "SizeBytes": 169,
 //         "StreamViewType": "NEW_IMAGE"
 //       },
-//       "eventSourceARN": "arn:aws:dynamodb:us-west-2:839811712080:table/cogcc-pdf-urls/stream/2020-02-22T20:53:55.247"
+//       "eventSourceARN": "arn:aws:dynamodb:us-east-1:839811712080:table/cogcc-pdf-urls/stream/2020-02-22T20:53:55.247"
 //     }
 //   ]
 // }
@@ -46,13 +46,13 @@ const S3_BUCKET_NAME = process.env.S3_BUCKET_NAME || "";
 // // // //
 
 // Downloads a file from a URL and writes it to `./tmp/filename
-function downloadFile(url: string, dest: string): Promise<any> {
-  return new Promise(resolve => {
+function downloadFile(url: string, dest: string): Promise<void> {
+  return new Promise((resolve) => {
     const file = fs.createWriteStream(dest);
     console.log("created file write stream: " + dest);
 
     // Fetches URL using HTTP
-    http.get(url, response => {
+    http.get(url, (response) => {
       // Logs downloaded file message
       console.log("downloaded file: " + url);
 
@@ -60,7 +60,7 @@ function downloadFile(url: string, dest: string): Promise<any> {
       response.pipe(file);
 
       // Defines callback for stream "finish" event
-      file.on("finish", function() {
+      file.on("finish", function () {
         // Logs wrote-to-file message
         console.log("wrote to file: " + dest);
 
@@ -74,7 +74,7 @@ function downloadFile(url: string, dest: string): Promise<any> {
 
 // // // //
 
-export const handler = async (event: any = {}): Promise<any> => {
+export const handler = async (event: any = {}): Promise<void> => {
   // Logs start message + S3_BUCKET_NAME
   console.log("download-file --> START");
   console.log(`writing to S3 bucket: ${S3_BUCKET_NAME}`);
@@ -112,7 +112,7 @@ export const handler = async (event: any = {}): Promise<any> => {
     .upload({
       Bucket: S3_BUCKET_NAME,
       Key: documentId + ".pdf",
-      Body: fs.readFileSync(filepath)
+      Body: fs.readFileSync(filepath),
     })
     .send((err, data) => {
       console.log(err, data);

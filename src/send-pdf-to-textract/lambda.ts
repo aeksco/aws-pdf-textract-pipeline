@@ -1,11 +1,11 @@
 import * as AWS from "aws-sdk";
-const textract = new AWS.Textract({ region: "us-west-2" });
+const textract = new AWS.Textract({ region: process.env.CDK_DEFAULT_REGION });
 const SNS_TOPIC_ARN = process.env.SNS_TOPIC_ARN || "";
 const SNS_ROLE_ARN = process.env.SNS_ROLE_ARN || "";
 const S3_BUCKET_NAME = process.env.S3_BUCKET_NAME || "";
 
 // TOOD - replace `any` with correct event type
-export const handler = async (event: any = {}): Promise<any> => {
+export const handler = async (event: any = {}): Promise<void> => {
   // Logs starting message + event
   console.log("send-pdf-to-textract -> start");
   console.log(JSON.stringify(event, null, 4));
@@ -27,14 +27,14 @@ export const handler = async (event: any = {}): Promise<any> => {
     DocumentLocation: {
       S3Object: {
         Bucket: S3_BUCKET_NAME,
-        Name: filename
-      }
+        Name: filename,
+      },
     },
     FeatureTypes: ["FORMS"],
     NotificationChannel: {
       RoleArn: SNS_ROLE_ARN,
-      SNSTopicArn: SNS_TOPIC_ARN
-    }
+      SNSTopicArn: SNS_TOPIC_ARN,
+    },
   };
 
   // Log startDocumentAnalysis param
@@ -42,8 +42,8 @@ export const handler = async (event: any = {}): Promise<any> => {
   console.log(params);
 
   // Invoke Textract.startDocumentAnalysis
-  await new Promise(resolve => {
-    return textract.startDocumentAnalysis(params, function(err, data) {
+  await new Promise((resolve) => {
+    return textract.startDocumentAnalysis(params, function (err, data) {
       // Logs error state
       console.log("startDocumentAnalysis - err");
       console.log(err);
