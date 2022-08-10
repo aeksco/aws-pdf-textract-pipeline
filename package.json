@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@types/puppeteer": "^5.4.6",
-    "aws-cdk-lib": "^2.36.0",
+    "aws-cdk-lib": "^2.37.0",
     "puppeteer-lambda": "^1.1.3"
   }
 }
