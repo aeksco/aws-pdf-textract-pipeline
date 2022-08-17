@@ -843,10 +843,10 @@ available-typed-arrays@^1.0.5:
   resolved "https://registry.yarnpkg.com/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz#92f95616501069d07d10edb2fc37d3e1c65123b7"
   integrity sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==
 
-aws-cdk-lib@^2.37.1:
-  version "2.37.1"
-  resolved "https://registry.yarnpkg.com/aws-cdk-lib/-/aws-cdk-lib-2.37.1.tgz#8ff0dbb784236cb5c201fe2e2de41222d83bac87"
-  integrity sha512-TN9PkfxGvwpODOBedhmCHUFMwvrNBJIadY42BYyOerk1Hw9bOT5R3phqhm4ujzJDHKXtdgRNFRg1zw6spRodjg==
+aws-cdk-lib@^2.38.0:
+  version "2.38.0"
+  resolved "https://registry.yarnpkg.com/aws-cdk-lib/-/aws-cdk-lib-2.38.0.tgz#afbe5472aebee95f9b50e57470a1f6e8757a19ab"
+  integrity sha512-OV2F4tcPgQH7P9wWYtS5m8hfO9Bup1FSkHUCzinW42oKTNk717CelkCIZ+aEzf3jdMjyeeNYEIEb++QTU4jdFQ==
   dependencies:
     "@balena/dockerignore" "^1.0.2"
     case "1.6.3"
