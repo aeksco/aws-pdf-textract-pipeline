@@ -10,27 +10,27 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@aws-cdk/assert@^2.36.0":
-  version "2.36.0"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/assert/-/assert-2.36.0.tgz#d1a5082d846639f8f72f0dc83b4db8084f0328c9"
-  integrity sha512-eMjhZSpFVCOp3Az3d13ZVcEwq//IMD3QjgnPk92WcjnDsr5v1SXpjGCXFCJL31+6O1Jjb6SZWuukMsRhACT0wg==
+"@aws-cdk/assert@^2.37.1":
+  version "2.37.1"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/assert/-/assert-2.37.1.tgz#5877ec596e913dde716741c0830d3c8dd33a345b"
+  integrity sha512-FZ0cG0B5yqzKKt43Ah4ObahpnRCeTRYHSL0+GEz+VsGaKYpWuhosSulAlBG/XkROkdrKuYfDrk2ZlVpI/nb4Kg==
   dependencies:
-    "@aws-cdk/cloudformation-diff" "2.36.0"
+    "@aws-cdk/cloudformation-diff" "2.37.1"
 
-"@aws-cdk/cfnspec@2.36.0":
-  version "2.36.0"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/cfnspec/-/cfnspec-2.36.0.tgz#b717e915f4941e81cbca19c2e225a369db580e85"
-  integrity sha512-Vvohnrr+XpazkRNj+kue3D33606+LsWR0S0ZrTq5GBWVxqjIeUQRoQtaR3SCqLjD9fEJr0cPGsPviTZnEvAIpA==
+"@aws-cdk/cfnspec@2.37.1":
+  version "2.37.1"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/cfnspec/-/cfnspec-2.37.1.tgz#f091bba74b734614f76197922616b019418430bf"
+  integrity sha512-Q5zW5AvZ6pHz3jkgvl/8wO/kFmlMXexxh0SHRh7Ud7b+oi8WqKRU1QSjRRVHuKWGLyB9rlvj7yHjDYZd1yiyFQ==
   dependencies:
     fs-extra "^9.1.0"
     md5 "^2.3.0"
 
-"@aws-cdk/cloudformation-diff@2.36.0":
-  version "2.36.0"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/cloudformation-diff/-/cloudformation-diff-2.36.0.tgz#fc0c8eed298d0e94fc3757e62d68af360046a86a"
-  integrity sha512-+7qGlqHM7yrjTNndOPc4iWO4IEiE9NrNyuLbcJWJK8DpjrGjRWT20CiWpNM9GlGEqrYUadOWqOkFqoiR1FX97w==
+"@aws-cdk/cloudformation-diff@2.37.1":
+  version "2.37.1"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/cloudformation-diff/-/cloudformation-diff-2.37.1.tgz#c81d2e570457c99a5da681d3d47cda6d11080a92"
+  integrity sha512-haFYi5GAmB5bKDET+7osWlebazyjwq1fKBm5iB5AURIdyeejxzzP0CAjjOTW5hw8W2HWDkKxHSD0x8zVeVSNag==
   dependencies:
-    "@aws-cdk/cfnspec" "2.36.0"
+    "@aws-cdk/cfnspec" "2.37.1"
     "@types/node" "^14.18.23"
     chalk "^4"
     diff "^5.1.0"
