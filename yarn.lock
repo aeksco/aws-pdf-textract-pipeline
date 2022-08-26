@@ -10,28 +10,28 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@aws-cdk/assert@^2.32.1":
-  version "2.32.1"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/assert/-/assert-2.32.1.tgz#1b8fb1f67836189f8689252333ab3a609ae551e0"
-  integrity sha512-2quULyoI7O7+Uw+LjJoTV6po/YjbRRLGVoJ2Kb4js9wUtcULa5sCmy4J7jY0IBeQR8Nis0ipJlgQ1tOfd112zw==
+"@aws-cdk/assert@^2.38.1":
+  version "2.38.1"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/assert/-/assert-2.38.1.tgz#655c17a856e89ed47ffe5e9d3b81f2e5d6b674ba"
+  integrity sha512-QRTazJOJOdhBQKv8WBYza1QrGDer1ToFEv1+QICMl/ZJw+GZOIYMB8LtMAwk1qg4A4myXlgLZx4C0EQAd4JL4w==
   dependencies:
-    "@aws-cdk/cloudformation-diff" "2.32.1"
+    "@aws-cdk/cloudformation-diff" "2.38.1"
 
-"@aws-cdk/cfnspec@2.32.1":
-  version "2.32.1"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/cfnspec/-/cfnspec-2.32.1.tgz#ef498bc75e0dafe7113018fb1ee3fd82890d5422"
-  integrity sha512-jZIhTWfHJWY4YWMzCqZgvLDX3lz8p93BpksPU+8QIVG6t3Pq6WqoOfx2sfEpoGU1FqtWkzH9oHcwpBksd9Ymrw==
+"@aws-cdk/cfnspec@2.38.1":
+  version "2.38.1"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/cfnspec/-/cfnspec-2.38.1.tgz#deaa8660245542a50175f479f525431f2e081e25"
+  integrity sha512-PhwbtUDAfDj0YifX+oFVsutx6Kg/xBSeYqVHAF0R42yQUMpy18xgd/4we7ZJeVCvce0eRCzXnILfh8H9qnjJKw==
   dependencies:
     fs-extra "^9.1.0"
     md5 "^2.3.0"
 
-"@aws-cdk/cloudformation-diff@2.32.1":
-  version "2.32.1"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/cloudformation-diff/-/cloudformation-diff-2.32.1.tgz#78e3f2f6e70966deea6b5a7d4b9092182ad28ba4"
-  integrity sha512-c6em+A2pp0UVrRh0m5YBCeMWOdkhO9UZV+yDJdYVh54KMwBKbgf6PeYdiLZozXxws0/fLbiMTpVAWapUHz+Zkg==
+"@aws-cdk/cloudformation-diff@2.38.1":
+  version "2.38.1"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/cloudformation-diff/-/cloudformation-diff-2.38.1.tgz#1020cf9bd85863bd6d8a36846079790b6048e497"
+  integrity sha512-MI/asxa35dNZnoT87Z5eETFw4vS2/4ViOunPAUBr7jh2gryeHrchkXj3lB4tlmsOCONW4qaTJ7Lxqk2CPQO/Kg==
   dependencies:
-    "@aws-cdk/cfnspec" "2.32.1"
-    "@types/node" "^10.17.60"
+    "@aws-cdk/cfnspec" "2.38.1"
+    "@types/node" "^14.18.23"
     chalk "^4"
     diff "^5.1.0"
     fast-deep-equal "^3.1.3"
@@ -636,15 +636,15 @@
     jest-diff "^26.0.0"
     pretty-format "^26.0.0"
 
-"@types/node@*":
-  version "18.0.5"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.0.5.tgz#96be8113b014e9e7f0c3609c4a25afadd85ff659"
-  integrity sha512-En7tneq+j0qAiVwysBD79y86MT3ModuoIJbe7JXp+sb5UAjInSShmK3nXXMioBzfF7rXC12hv12d4IyCVwN4dA==
+"@types/node@*", "@types/node@^18.7.13":
+  version "18.7.13"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.7.13.tgz#23e6c5168333480d454243378b69e861ab5c011a"
+  integrity sha512-46yIhxSe5xEaJZXWdIBP7GU4HDTG8/eo0qd9atdiL+lFpA03y8KS+lkTN834TWJj5767GbWv4n/P6efyTFt1Dw==
 
-"@types/node@^10.17.27", "@types/node@^10.17.60":
-  version "10.17.60"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.17.60.tgz#35f3d6213daed95da7f0f73e75bcc6980e90597b"
-  integrity sha512-F0KIgDJfy2nA3zMLmWGKxcH2ZVEtCZXHHdOQs2gSaQ27+lNeEfGxzkIw90aXswATX7AZ33tahPbzy6KAfUreVw==
+"@types/node@^14.18.23":
+  version "14.18.23"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.18.23.tgz#70f5f20b0b1b38f696848c1d3647bb95694e615e"
+  integrity sha512-MhbCWN18R4GhO8ewQWAFK4TGQdBpXWByukz7cWyJmXhvRuCIaM/oWytGPqVmDzgEnnaIc9ss6HbU5mUi+vyZPA==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.1"
@@ -656,10 +656,10 @@
   resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-2.6.3.tgz#68ada76827b0010d0db071f739314fa429943d0a"
   integrity sha512-ymZk3LEC/fsut+/Q5qejp6R9O1rMxz3XaRHDV6kX8MrGAhOSPqVARbDi+EZvInBpw+BnCX3TD240byVkOfQsHg==
 
-"@types/puppeteer@^2.0.0":
-  version "2.1.8"
-  resolved "https://registry.yarnpkg.com/@types/puppeteer/-/puppeteer-2.1.8.tgz#c880b35b7d34ef85806deca7032d959ec5af8498"
-  integrity sha512-sFyFD1yIlBwg8jpCbmi4ngecMI6Uw6iEKyUUglFXOiaZQHTvE8oftAWKK7E5sac1Uce+7uR5iVKWDLKDxmjcSA==
+"@types/puppeteer@^5.4.6":
+  version "5.4.6"
+  resolved "https://registry.yarnpkg.com/@types/puppeteer/-/puppeteer-5.4.6.tgz#afc438e41dcbc27ca1ba0235ea464a372db2b21c"
+  integrity sha512-98Kghehs7+/GD9b56qryhqdqVCXUTbetTv3PlvDnmFRTHQH0j9DIp1f7rkAW3BAj4U3yoeSEQnKgdW8bDq0Y0Q==
   dependencies:
     "@types/node" "*"
 
@@ -843,10 +843,10 @@ available-typed-arrays@^1.0.5:
   resolved "https://registry.yarnpkg.com/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz#92f95616501069d07d10edb2fc37d3e1c65123b7"
   integrity sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==
 
-aws-cdk-lib@^2.32.1:
-  version "2.32.1"
-  resolved "https://registry.yarnpkg.com/aws-cdk-lib/-/aws-cdk-lib-2.32.1.tgz#1e08043c58665f5b637ffbae9c858c043c8cb531"
-  integrity sha512-P0qGCh9sjJwrM0IaF6uULfup6R4JBoQKOxQxefF0KeCCgI3DbYoNHZOTJPejnaPRdX0Vhq607t6i6bq6gYxjOQ==
+aws-cdk-lib@^2.38.1:
+  version "2.38.1"
+  resolved "https://registry.yarnpkg.com/aws-cdk-lib/-/aws-cdk-lib-2.38.1.tgz#e96ee1362c86260786b3d808f593ca5edd813b29"
+  integrity sha512-vEgJBUzL1yqlSMYGjipl+eRwy900x3RmbVzTcxKdCZvhtBMQ1hqJAMgVswvoyA5EnvfELLlz9ufm+qdKGs9DxQ==
   dependencies:
     "@balena/dockerignore" "^1.0.2"
     case "1.6.3"
@@ -1342,10 +1342,10 @@ config-chain@^1.1.11:
     ini "^1.3.4"
     proto-list "~1.2.1"
 
-constructs@^10.1.48:
-  version "10.1.48"
-  resolved "https://registry.yarnpkg.com/constructs/-/constructs-10.1.48.tgz#e0dbbf445c578aedb6f8fa3cc2bb68247d6c7795"
-  integrity sha512-t1BrdP2X8QoC7cDwCU2TWNa23W8IztPYm3ZeWQvTERf3DSKfDZGg9x3um44dZyP+Iy2cDfKolw8llk+jM7NGkQ==
+constructs@^10.1.86:
+  version "10.1.86"
+  resolved "https://registry.yarnpkg.com/constructs/-/constructs-10.1.86.tgz#007215a46998d033e2e9ae1511fff0ac2e67e7d5"
+  integrity sha512-yEC7T93oQU6pEhJlooqSq5JKNGOqMiOvmmnZtJxFBOmCNhUDddNmewb0/9K+FPMFMJn4MQ4G0qNGAaEqVgAyFg==
 
 content-disposition@^0.5.2:
   version "0.5.4"
