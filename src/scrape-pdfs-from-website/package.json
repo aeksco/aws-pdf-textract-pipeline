@@ -1,10 +1,10 @@
 {
-  "name": "scrape-pdfs-lambda",
-  "version": "1.0.0",
-  "description": "Scrapes PDF download URLs using Puppeteer",
-  "private": true,
-  "dependencies": {
-    "chrome-aws-lambda": "^2.1.1",
-    "puppeteer-core": "^2.1.1"
-  }
+    "name": "scrape-pdfs-lambda",
+    "version": "1.0.0",
+    "description": "Scrapes PDF download URLs using Puppeteer",
+    "private": true,
+    "dependencies": {
+        "chrome-aws-lambda": "^2.1.1",
+        "puppeteer-core": "^2.1.1"
+    }
 }

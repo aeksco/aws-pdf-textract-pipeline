@@ -9,83 +9,83 @@ const PRIMARY_KEY = process.env.PRIMARY_KEY || "";
 // DOC: https://docs.aws.amazon.com/textract/latest/dg/examples-extract-kvp.html
 // DOC: https://docs.aws.amazon.com/textract/latest/dg/examples-export-table-csv.html
 function find_value_block(key_block: any, value_map: any) {
-  let value_block = "";
-  key_block["Relationships"].forEach((relationship: any) => {
-    if (relationship["Type"] == "VALUE") {
-      relationship["Ids"].forEach((value_id: any) => {
-        value_block = value_map[value_id];
-      });
-    }
-  });
-  return value_block;
+    let value_block = "";
+    key_block["Relationships"].forEach((relationship: any) => {
+        if (relationship["Type"] == "VALUE") {
+            relationship["Ids"].forEach((value_id: any) => {
+                value_block = value_map[value_id];
+            });
+        }
+    });
+    return value_block;
 }
 
 // // // //
 
 function get_text(result: any, blocks_map: any) {
-  let text = "";
-  let word;
-  if (result["Relationships"]) {
-    result["Relationships"].forEach((relationship: any) => {
-      if (relationship["Type"] === "CHILD") {
-        relationship["Ids"].forEach((child_id: any) => {
-          word = blocks_map[child_id];
+    let text = "";
+    let word;
+    if (result["Relationships"]) {
+        result["Relationships"].forEach((relationship: any) => {
+            if (relationship["Type"] === "CHILD") {
+                relationship["Ids"].forEach((child_id: any) => {
+                    word = blocks_map[child_id];
 
-          if (word["BlockType"] == "WORD") {
-            text += word["Text"] + " ";
-          }
-          if (word["BlockType"] == "SELECTION_ELEMENT") {
-            if (word["SelectionStatus"] == "SELECTED") {
-              text += "X ";
+                    if (word["BlockType"] == "WORD") {
+                        text += word["Text"] + " ";
+                    }
+                    if (word["BlockType"] == "SELECTION_ELEMENT") {
+                        if (word["SelectionStatus"] == "SELECTED") {
+                            text += "X ";
+                        }
+                    }
+                });
             }
-          }
         });
-      }
-    });
-  }
-  return text;
+    }
+    return text;
 }
 
 // // // //
 
 function getKvMap(resp: any) {
-  // get key and value maps
-  let key_map: any = {};
-  let value_map: any = {};
-  let block_map: any = {};
+    // get key and value maps
+    let key_map: any = {};
+    let value_map: any = {};
+    let block_map: any = {};
 
-  resp["Blocks"].forEach((block: any) => {
-    const block_id = block["Id"];
-    block_map[block_id] = block;
-    if (block["BlockType"] == "KEY_VALUE_SET") {
-      if (block["EntityTypes"].includes("KEY")) {
-        key_map[block_id] = block;
-      } else {
-        value_map[block_id] = block;
-      }
-    }
-  });
+    resp["Blocks"].forEach((block: any) => {
+        const block_id = block["Id"];
+        block_map[block_id] = block;
+        if (block["BlockType"] == "KEY_VALUE_SET") {
+            if (block["EntityTypes"].includes("KEY")) {
+                key_map[block_id] = block;
+            } else {
+                value_map[block_id] = block;
+            }
+        }
+    });
 
-  return [key_map, value_map, block_map];
+    return [key_map, value_map, block_map];
 }
 
 // // // //
 
 function getKvRelationship(keyMap: any, valueMap: any, blockMap: any) {
-  let kvs: any = {};
-  // for block_id, key_block in key_map.items():
-  Object.keys(keyMap).forEach((blockId) => {
-    const keyBlock = keyMap[blockId];
-    const value_block = find_value_block(keyBlock, valueMap);
-    // console.log("value_block");
+    let kvs: any = {};
+    // for block_id, key_block in key_map.items():
+    Object.keys(keyMap).forEach((blockId) => {
+        const keyBlock = keyMap[blockId];
+        const value_block = find_value_block(keyBlock, valueMap);
+        // console.log("value_block");
 
-    // Gets Key + Value
-    const key = get_text(keyBlock, blockMap);
-    const val = get_text(value_block, blockMap);
-    kvs[key] = val;
-  });
+        // Gets Key + Value
+        const key = get_text(keyBlock, blockMap);
+        const val = get_text(value_block, blockMap);
+        kvs[key] = val;
+    });
 
-  return kvs;
+    return kvs;
 }
 
 // // // //
@@ -119,115 +119,115 @@ function getKvRelationship(keyMap: any, valueMap: any, blockMap: any) {
  * }
  */
 export const handler = async (event: any = {}): Promise<void> => {
-  // Logs starting message
-  console.log("send-textract-result-to-dynamo - start");
-  console.log(JSON.stringify(event, null, 4));
+    // Logs starting message
+    console.log("send-textract-result-to-dynamo - start");
+    console.log(JSON.stringify(event, null, 4));
 
-  // Defines variable to store JobId from Textract.analyzeDocument
-  let JobId = "";
+    // Defines variable to store JobId from Textract.analyzeDocument
+    let JobId = "";
 
-  // Attempt to parse the JobId from the `event` param
-  try {
-    JobId = event["Records"][0]["Sns"]["Message"];
-    console.log("parsed jobid struct from event");
+    // Attempt to parse the JobId from the `event` param
+    try {
+        JobId = event["Records"][0]["Sns"]["Message"];
+        console.log("parsed jobid struct from event");
+        console.log(JobId);
+        console.log(JSON.parse(JobId));
+        const jobIDStruct = JSON.parse(JobId);
+        JobId = jobIDStruct["JobId"];
+    } catch (e) {
+        // Logs error message from
+        console.log("Error parsing JobId from SNS message");
+        console.log(e);
+        return;
+    }
+
+    // Log JobID
+    console.log("JobId");
     console.log(JobId);
-    console.log(JSON.parse(JobId));
-    const jobIDStruct = JSON.parse(JobId);
-    JobId = jobIDStruct["JobId"];
-  } catch (e) {
-    // Logs error message from
-    console.log("Error parsing JobId from SNS message");
-    console.log(e);
-    return;
-  }
 
-  // Log JobID
-  console.log("JobId");
-  console.log(JobId);
-
-  // Defines params for Textract.getDocumentAnalysis
-  const getDocumentAnalysisParams: AWS.Textract.Types.GetDocumentAnalysisRequest =
-    {
-      JobId,
-    };
-
-  // Logs getDocumentAnalysis params
-  console.log("getDocumentAnalysisParams");
-  console.log(getDocumentAnalysisParams);
-
-  // Fires off textract.getDocumentAnalysis
-  await new Promise((resolve) => {
-    textract.getDocumentAnalysis(
-      getDocumentAnalysisParams,
-      async function (err: any, data: any) {
-        // Logs error response
-        console.log("Textract - getDocumentAnalysis error");
-        console.log(err);
-
-        // Logs successful response
-        console.log("Textract - getDocumentAnalysis data");
-        console.log(data);
-
-        // Gets KV mapping
-        const [keyMap, valueMap, blockMap] = getKvMap(data);
-
-        // Get Key Value relationship
-        const kvPairs = getKvRelationship(keyMap, valueMap, blockMap);
-
-        // Logs form key-value pairs from Textract response
-        console.log("Got KV pairs");
-
-        // Sanitize KV pairs
-        const sanitizedKvPairs: { [key: string]: string } = {};
-
-        // Iterate over each key in kvPairs
-        Object.keys(kvPairs).forEach((key: string) => {
-          // Sanitizes the key from kv pairs
-          // DynamoDB key cannot contain any whitespace
-          const sanitizedKey: string = key
-            .toLowerCase()
-            .trim()
-            .replace(/\s/g, "_")
-            .replace(":", "");
-
-          // Pulls value from kbPairs, trims whitespace
-          const value: string = kvPairs[key].trim();
-
-          // Assigns value from kvPairs to sanitizedKey
-          if (value !== "") {
-            sanitizedKvPairs[sanitizedKey] = kvPairs[key];
-          }
-        });
-
-        // Logs sanitized key-value pairs
-        console.log("SanitizedKvPairs");
-        console.log(sanitizedKvPairs);
-
-        // Defines the item we're inserting into the database
-        const item: any = {
-          [PRIMARY_KEY]: JobId,
-          data: sanitizedKvPairs,
+    // Defines params for Textract.getDocumentAnalysis
+    const getDocumentAnalysisParams: AWS.Textract.Types.GetDocumentAnalysisRequest =
+        {
+            JobId,
         };
 
-        // Defines the params for db.put
-        const putItemInput: AWS.DynamoDB.DocumentClient.PutItemInput = {
-          TableName: TABLE_NAME,
-          Item: item,
-        };
+    // Logs getDocumentAnalysis params
+    console.log("getDocumentAnalysisParams");
+    console.log(getDocumentAnalysisParams);
 
-        // Logs DynamoDB params
-        console.log("putItemInput");
-        console.log(putItemInput);
+    // Fires off textract.getDocumentAnalysis
+    await new Promise((resolve) => {
+        textract.getDocumentAnalysis(
+            getDocumentAnalysisParams,
+            async function (err: any, data: any) {
+                // Logs error response
+                console.log("Textract - getDocumentAnalysis error");
+                console.log(err);
 
-        // Inserts the record into the DynamoDB table
-        await db.put(putItemInput).promise();
+                // Logs successful response
+                console.log("Textract - getDocumentAnalysis data");
+                console.log(data);
 
-        // Logs shutdown message
-        console.log("send-textract-result-to-dynamo - shutdown");
+                // Gets KV mapping
+                const [keyMap, valueMap, blockMap] = getKvMap(data);
 
-        // Resolves promise
-        resolve(true);
-      }
-    );
-  });
+                // Get Key Value relationship
+                const kvPairs = getKvRelationship(keyMap, valueMap, blockMap);
+
+                // Logs form key-value pairs from Textract response
+                console.log("Got KV pairs");
+
+                // Sanitize KV pairs
+                const sanitizedKvPairs: { [key: string]: string } = {};
+
+                // Iterate over each key in kvPairs
+                Object.keys(kvPairs).forEach((key: string) => {
+                    // Sanitizes the key from kv pairs
+                    // DynamoDB key cannot contain any whitespace
+                    const sanitizedKey: string = key
+                        .toLowerCase()
+                        .trim()
+                        .replace(/\s/g, "_")
+                        .replace(":", "");
+
+                    // Pulls value from kbPairs, trims whitespace
+                    const value: string = kvPairs[key].trim();
+
+                    // Assigns value from kvPairs to sanitizedKey
+                    if (value !== "") {
+                        sanitizedKvPairs[sanitizedKey] = kvPairs[key];
+                    }
+                });
+
+                // Logs sanitized key-value pairs
+                console.log("SanitizedKvPairs");
+                console.log(sanitizedKvPairs);
+
+                // Defines the item we're inserting into the database
+                const item: any = {
+                    [PRIMARY_KEY]: JobId,
+                    data: sanitizedKvPairs,
+                };
+
+                // Defines the params for db.put
+                const putItemInput: AWS.DynamoDB.DocumentClient.PutItemInput = {
+                    TableName: TABLE_NAME,
+                    Item: item,
+                };
+
+                // Logs DynamoDB params
+                console.log("putItemInput");
+                console.log(putItemInput);
+
+                // Inserts the record into the DynamoDB table
+                await db.put(putItemInput).promise();
+
+                // Logs shutdown message
+                console.log("send-textract-result-to-dynamo - shutdown");
+
+                // Resolves promise
+                resolve(true);
+            }
+        );
+    });
 };
