@@ -10,13 +10,4 @@ updates:
     schedule:
       interval: "daily"
     allow:
-      - dependency-name: "@aws-cdk/assert"
-      - dependency-name: "@types/jest"
-      - dependency-name: "@types/node"
-      - dependency-name: "@types/puppeteer"
-      - dependency-name: "aws-cdk-lib"
-      - dependency-name: "constructs"
-      - dependency-name: "jest"
-      - dependency-name: "puppeteer-lambda"
-      - dependency-name: "ts-jest"
-      - dependency-name: "typescript"
+      - dependency-name: "*"
