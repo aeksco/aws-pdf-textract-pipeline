@@ -210,17 +210,17 @@ export const handler = async (event: any = {}): Promise<void> => {
         };
 
         // Defines the params for db.put
-        const dynamoParams = {
+        const putItemInput: AWS.DynamoDB.DocumentClient.PutItemInput = {
           TableName: TABLE_NAME,
           Item: item,
         };
 
         // Logs DynamoDB params
-        console.log("dynamoParams");
-        console.log(dynamoParams);
+        console.log("putItemInput");
+        console.log(putItemInput);
 
         // Inserts the record into the DynamoDB table
-        await db.put(dynamoParams).promise();
+        await db.put(putItemInput).promise();
 
         // Logs shutdown message
         console.log("send-textract-result-to-dynamo - shutdown");
