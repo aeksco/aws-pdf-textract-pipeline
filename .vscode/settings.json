@@ -1,0 +1,9 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.exclude": {
+    "index.js": true,
+    "src/**/*.js": true,
+    "**/node_modules/**": true
+  }
+}
