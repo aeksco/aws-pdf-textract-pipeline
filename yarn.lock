@@ -10,27 +10,27 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@aws-cdk/assert@^2.39.1":
-  version "2.39.1"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/assert/-/assert-2.39.1.tgz#b40d48acf9267054b5e27647c610c68f70ed9393"
-  integrity sha512-/7QCNG8BKhlr1abl6hyOF0NQZbBwr84FgkMzJWCzXlBNQB5aq/buzZrCBHYN+TTGrYkRPZDvRU7gZrKEkXHHZQ==
+"@aws-cdk/assert@^2.40.0":
+  version "2.40.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/assert/-/assert-2.40.0.tgz#b131271f662038bdf9b6a289c912ccfe9ae46072"
+  integrity sha512-qx8/zRsHXAbLoclK8l6hGctCxeT/lAtCn7y9J4DnPa8+u2JtmgEPDwSHnQya/yiZU2/HjmcftSu8/ssqxbCiwQ==
   dependencies:
-    "@aws-cdk/cloudformation-diff" "2.39.1"
+    "@aws-cdk/cloudformation-diff" "2.40.0"
 
-"@aws-cdk/cfnspec@2.39.1":
-  version "2.39.1"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/cfnspec/-/cfnspec-2.39.1.tgz#d24c62ed419f52a9508fda0961c2e902b21fa35a"
-  integrity sha512-Ym7U37V/FYBCs/O6oYFcqqAd3Y5pHPkF5r515lr4B7anARfqxfeOSjgI32MMWFGNy0idadgo8YwyO5S1MG1OKg==
+"@aws-cdk/cfnspec@2.40.0":
+  version "2.40.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/cfnspec/-/cfnspec-2.40.0.tgz#e606e8abe258f8953d28f0e905aa0805a0002a99"
+  integrity sha512-JuGyQi/me+clIGqS3ycT4xPx1J/N8Y39AO8u7m26Uddpjx+ex+puZUxVcdB13CMTuenP8EuUSp4AzilLv1uUaw==
   dependencies:
     fs-extra "^9.1.0"
     md5 "^2.3.0"
 
-"@aws-cdk/cloudformation-diff@2.39.1":
-  version "2.39.1"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/cloudformation-diff/-/cloudformation-diff-2.39.1.tgz#690f8ee839c101a00a8319aaea7ca608db61b74f"
-  integrity sha512-bvH87A5O9OGK+gktcYLkA2r+Qe0g6HJvgATzG6Z6LAKH7S3OuKqBNrjSkBkNqJiLvWmdulUqzFT2BVEMzyB+Yw==
+"@aws-cdk/cloudformation-diff@2.40.0":
+  version "2.40.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/cloudformation-diff/-/cloudformation-diff-2.40.0.tgz#117829120cd77a71ca5e35a3d478057a94213f79"
+  integrity sha512-w7Ppdni8x8otHNqT4wfERO6L6LZNNZwtMzjb6B9YKJFy6WP3rEkBbm70hfKAVfQ40VbdEj5Q8J4amWo3ACoD8A==
   dependencies:
-    "@aws-cdk/cfnspec" "2.39.1"
+    "@aws-cdk/cfnspec" "2.40.0"
     "@types/node" "^14.18.26"
     chalk "^4"
     diff "^5.1.0"
@@ -636,10 +636,10 @@
     jest-diff "^26.0.0"
     pretty-format "^26.0.0"
 
-"@types/node@*", "@types/node@^18.7.14":
-  version "18.7.14"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.7.14.tgz#0fe081752a3333392d00586d815485a17c2cf3c9"
-  integrity sha512-6bbDaETVi8oyIARulOE9qF1/Qdi/23z6emrUh0fNJRUmjznqrixD4MpGDdgOFk5Xb0m2H6Xu42JGdvAxaJR/wA==
+"@types/node@*", "@types/node@^18.7.16":
+  version "18.7.16"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.7.16.tgz#0eb3cce1e37c79619943d2fd903919fc30850601"
+  integrity sha512-EQHhixfu+mkqHMZl1R2Ovuvn47PUw18azMJOTwSZr9/fhzHNGXAJ0ma0dayRVchprpCj0Kc1K1xKoWaATWF1qg==
 
 "@types/node@^14.18.26":
   version "14.18.26"
@@ -1621,9 +1621,9 @@ duplexer3@^0.1.4:
   integrity sha512-1A8za6ws41LQgv9HrE/66jyC5yuSjQ3L/KOpFtoBilsAK2iA2wuS5rTt1OCzIvtS2V7nVmedsUU+DGRcjBmOYA==
 
 electron-to-chromium@^1.4.202:
-  version "1.4.241"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.241.tgz#5aa03ab94db590d8269f4518157c24b1efad34d6"
-  integrity sha512-e7Wsh4ilaioBZ5bMm6+F4V5c11dh56/5Jwz7Hl5Tu1J7cnB+Pqx5qIF2iC7HPpfyQMqGSvvLP5bBAIDd2gAtGw==
+  version "1.4.246"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.246.tgz#802132d1bbd3ff32ce82fcd6a6ed6ab59b4366dc"
+  integrity sha512-/wFCHUE+Hocqr/LlVGsuKLIw4P2lBWwFIDcNMDpJGzyIysQV4aycpoOitAs32FT94EHKnNqDR/CVZJFbXEufJA==
 
 emittery@^0.7.1:
   version "0.7.2"
