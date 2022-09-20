@@ -12,10 +12,10 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@aws-cdk/assert": "^2.40.0",
+    "@aws-cdk/assert": "^2.42.0",
     "@types/jest": "^26.0.10",
     "@types/node": "^18.7.16",
-    "constructs": "^10.1.94",
+    "constructs": "^10.1.107",
     "jest": "^26.4.2",
     "prettier": "^2.7.1",
     "ts-jest": "^26.2.0",
@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@types/puppeteer": "^5.4.6",
-    "aws-cdk-lib": "^2.40.0",
+    "aws-cdk-lib": "^2.42.0",
     "puppeteer-lambda": "^1.1.3"
   }
 }
