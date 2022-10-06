@@ -859,9 +859,9 @@ aws-cdk-lib@^2.44.0:
     yaml "1.10.2"
 
 aws-sdk@^2.391.0:
-  version "2.1225.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1225.0.tgz#5747cd1842f461300fb1b8d034c7ef1ae14185a1"
-  integrity sha512-JYYYVpr4EktsohOrO8+KfhmHGt2x2zi20Ypkrtllhrh6fhtosduqpH5cQF7wYX/zEvjqduv0dHYd3sXCROHP8A==
+  version "2.1230.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1230.0.tgz#d7ebf384f2cb9b312325c537d38bec47e5ba8087"
+  integrity sha512-7Y260dvzr7b8/lZhg6A7h5WyHvfCgdFL0NiBgCuT3/xlw9rvq9b08JNYErEpaJSmo+A5hW35n6wtzii4/FUSTA==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
@@ -1621,9 +1621,9 @@ duplexer3@^0.1.4:
   integrity sha512-1A8za6ws41LQgv9HrE/66jyC5yuSjQ3L/KOpFtoBilsAK2iA2wuS5rTt1OCzIvtS2V7nVmedsUU+DGRcjBmOYA==
 
 electron-to-chromium@^1.4.251:
-  version "1.4.271"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.271.tgz#2d9f04f6a53c70e1bb1acfaae9c39f07ca40d290"
-  integrity sha512-BCPBtK07xR1/uY2HFDtl3wK2De66AW4MSiPlLrnPNxKC/Qhccxd59W73654S3y6Rb/k3hmuGJOBnhjfoutetXA==
+  version "1.4.274"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.274.tgz#74369ac6f020c3cea7c77ec040ddf159fe226233"
+  integrity sha512-Fgn7JZQzq85I81FpKUNxVLAzoghy8JZJ4NIue+YfUYBbu1AkpgzFvNwzF/ZNZH9ElkmJD0TSWu1F2gTpw/zZlg==
 
 emittery@^0.7.1:
   version "0.7.2"
