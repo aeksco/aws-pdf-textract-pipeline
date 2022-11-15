@@ -22,7 +22,7 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
-    "@types/puppeteer": "^5.4.7",
+    "@types/puppeteer": "^7.0.4",
     "aws-cdk-lib": "^2.46.0",
     "puppeteer-lambda": "^1.1.3"
   }
