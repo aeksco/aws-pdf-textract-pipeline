@@ -12,7 +12,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@aws-cdk/assert": "^2.46.0",
+    "@aws-cdk/assert": "^2.53.0",
     "@types/jest": "^26.0.10",
     "@types/node": "^18.11.9",
     "constructs": "^10.1.177",
