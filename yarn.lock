@@ -10,12 +10,12 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@aws-cdk/assert@^2.46.0":
-  version "2.46.0"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/assert/-/assert-2.46.0.tgz#511e704efeddf7692fbc9a75b7d04624ad216286"
-  integrity sha512-Z9G7gbahbQCWiQa6vV17ycBsKOvN31f/KX4WyOeQueOP2LkK4XJs8gi8gCDM+MRUbGO9QxKXwxEMq0xvbSUMug==
+"@aws-cdk/assert@^2.53.0":
+  version "2.53.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/assert/-/assert-2.53.0.tgz#7b86ff14660e56e1b98580b3e1c8c00bcfb8e53f"
+  integrity sha512-9iKM0JBQBc8IK14aZAbL9lfL+03AO40k/qHIZjIVGRe1R3aXjvdhfMXALB0IDFvJ2K3l9H1PuodhsrQ5hmEMyA==
   dependencies:
-    "@aws-cdk/cloudformation-diff" "2.46.0"
+    "@aws-cdk/cloudformation-diff" "2.53.0"
 
 "@aws-cdk/asset-awscli-v1@^2.2.9":
   version "2.2.22"
@@ -32,26 +32,26 @@
   resolved "https://registry.yarnpkg.com/@aws-cdk/asset-node-proxy-agent-v5/-/asset-node-proxy-agent-v5-2.0.28.tgz#b8a88e445c16e7b97184044a8677e21d7089ee3e"
   integrity sha512-Ub2cfJjhiutI6hCvpSOxgcdQOM3egZwrFcOtbM+OEi8ecYM3GH4YAoUtw74+kJcvXMsww+IojrE8bdohDdHpVQ==
 
-"@aws-cdk/cfnspec@2.46.0":
-  version "2.46.0"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/cfnspec/-/cfnspec-2.46.0.tgz#a3092c5ebe27c26f2f3e57e3dab368a7ae19a9ab"
-  integrity sha512-uCXX150id58kz0CdhB3nAMWT6K5Lgeg8PxtQkTWt0SNJdnSzvvijtSyLWpuOA/WQhsxOaRJ0y2AGCrSRvY8ymQ==
+"@aws-cdk/cfnspec@2.53.0":
+  version "2.53.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/cfnspec/-/cfnspec-2.53.0.tgz#d5ecaac6b62b9c5aea9c5683c4eb1783a5e4f572"
+  integrity sha512-cPVVWdvzvl+E7eoSmOG3GFc1a6aeKRKECOSqPWbyxVtfncXLypGsjXfFUgWlulPmLGLRG3B+7SirjvuCnKCJiA==
   dependencies:
     fs-extra "^9.1.0"
     md5 "^2.3.0"
 
-"@aws-cdk/cloudformation-diff@2.46.0":
-  version "2.46.0"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/cloudformation-diff/-/cloudformation-diff-2.46.0.tgz#6c908263ab68e45196ae3d07fd1557dd9202b8b4"
-  integrity sha512-9byn4qSOD2aX1tSzgzgTtPrxh4mJWhtXOzHkncCYg3nsLNQq5EWMNN5AC7By/tz0Sv2zLH2SmAh7w11Jocdn7w==
+"@aws-cdk/cloudformation-diff@2.53.0":
+  version "2.53.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/cloudformation-diff/-/cloudformation-diff-2.53.0.tgz#cd4d8cbc53fba2b206acf0ba36431d74ab4e34f1"
+  integrity sha512-SSYJ3m+FtmPD+R3m/mdI/JIRueuteUJ8GotkXI0P7B7eflV0aOhpU/8uG41Q/zW+ICHYAGiQRwpY/LOuh5ZvNg==
   dependencies:
-    "@aws-cdk/cfnspec" "2.46.0"
-    "@types/node" "^14.18.32"
+    "@aws-cdk/cfnspec" "2.53.0"
+    "@types/node" "^14.18.33"
     chalk "^4"
     diff "^5.1.0"
     fast-deep-equal "^3.1.3"
     string-width "^4.2.3"
-    table "^6.8.0"
+    table "^6.8.1"
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.18.6":
   version "7.18.6"
@@ -656,10 +656,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.9.tgz#02d013de7058cea16d36168ef2fc653464cfbad4"
   integrity sha512-CRpX21/kGdzjOpFsZSkcrXMGIBWMGNIHXXBVFSH+ggkftxg+XYP20TESbh+zFvFj3EQOl5byk0HTRn1IL6hbqg==
 
-"@types/node@^14.18.32":
-  version "14.18.32"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.18.32.tgz#8074f7106731f1a12ba993fe8bad86ee73905014"
-  integrity sha512-Y6S38pFr04yb13qqHf8uk1nHE3lXgQ30WZbv1mLliV9pt0NjvqdWttLcrOYLnXbOafknVYRHZGoMSpR9UwfYow==
+"@types/node@^14.18.33":
+  version "14.18.34"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.18.34.tgz#cd2e6fa0dbfb08a62582a7b967558e73c32061ec"
+  integrity sha512-hcU9AIQVHmPnmjRK+XUUYlILlr9pQrsqSrwov/JK1pnf3GTQowVBhx54FbvM0AU/VXGH4i3+vgXS5EguR7fysA==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.1"
@@ -4405,7 +4405,7 @@ symbol-tree@^3.2.4:
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
   integrity sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==
 
-table@^6.8.0:
+table@^6.8.1:
   version "6.8.1"
   resolved "https://registry.yarnpkg.com/table/-/table-6.8.1.tgz#ea2b71359fe03b017a5fbc296204471158080bdf"
   integrity sha512-Y4X9zqrCftUhMeH2EptSSERdVKt/nEdijTOacGD/97EKjhQ/Qs8RTlEGABSJNNN8lac9kheH+af7yAkEWlgneA==
