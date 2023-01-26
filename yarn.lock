@@ -889,9 +889,9 @@ aws-cdk-lib@^2.58.0:
     yaml "1.10.2"
 
 aws-sdk@^2.391.0:
-  version "2.1285.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1285.0.tgz#4dd68cf35df891c96ef45929b7242a8ba7008299"
-  integrity sha512-nuoHXeyaJ3926NRfJCR2czcnToYDFvGFmhRSihgqxo0IgY4djFy7lZ+SdhqVODNal/Fd25SRQnTrYtYoRkgbkg==
+  version "2.1302.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1302.0.tgz#47467461fb971d23c56dd45d5dcc17ed5816e0de"
+  integrity sha512-OeP31meLGCcBJel2Re1yRsrjqDT3FvLFMQwPVtKHkXnws6QpgVg1FPiEjz4emEREUi6NfbqGNVExOGLsKiz0YA==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
@@ -2073,9 +2073,9 @@ get-caller-file@^2.0.1:
   integrity sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==
 
 get-intrinsic@^1.0.2, get-intrinsic@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/get-intrinsic/-/get-intrinsic-1.1.3.tgz#063c84329ad93e83893c7f4f243ef63ffa351385"
-  integrity sha512-QJVz1Tj7MS099PevUG5jvnt9tSkXN8K14dxQlikJuPt4uD9hHAHjLyLBiLR5zELelBdD9QNRAXZzsJx0WaDL9A==
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/get-intrinsic/-/get-intrinsic-1.2.0.tgz#7ad1dc0535f3a2904bba075772763e5051f6d05f"
+  integrity sha512-L049y6nFOuom5wGyRc3/gdTLO94dySVKRACj1RmJZBQXlbTMhtNIgkWkUHq+jYmZvKf14EW1EoJnnjbmoHij0Q==
   dependencies:
     function-bind "^1.1.1"
     has "^1.0.3"
