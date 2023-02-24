@@ -19,7 +19,7 @@
     "jest": "^26.4.2",
     "prettier": "^2.8.1",
     "ts-jest": "^26.2.0",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.5"
   },
   "dependencies": {
     "@types/puppeteer": "^7.0.4",
