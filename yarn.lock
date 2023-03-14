@@ -1386,10 +1386,10 @@ config-chain@^1.1.11:
     ini "^1.3.4"
     proto-list "~1.2.1"
 
-constructs@^10.1.245:
-  version "10.1.245"
-  resolved "https://registry.yarnpkg.com/constructs/-/constructs-10.1.245.tgz#8b1075fa68c7e798cdb84af36b3072b92003ff3d"
-  integrity sha512-3TOxsgv5atw87/tAnW4aa7aAp1lA8kqjJ/i78t7jCHJEDzWEOGpT2JjLulyNq+GtyIGBKvHd2a64gogULFJY6Q==
+constructs@^10.1.277:
+  version "10.1.277"
+  resolved "https://registry.yarnpkg.com/constructs/-/constructs-10.1.277.tgz#80e3b4a694db14c5041b3d3b1fbead655f862a85"
+  integrity sha512-N1TyBWsLFIp+Ulxm+F4tpjPIcYmQ/29f44as8KYSQ0dj8op5YEI7xeanwl6kuTIlgci0zCQ/yAPBhy0GRtt3aA==
 
 content-disposition@^0.5.2:
   version "0.5.4"
