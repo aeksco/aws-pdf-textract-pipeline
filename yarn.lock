@@ -701,9 +701,9 @@
   integrity sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==
 
 "@types/yargs@^15.0.0":
-  version "15.0.14"
-  resolved "https://registry.yarnpkg.com/@types/yargs/-/yargs-15.0.14.tgz#26d821ddb89e70492160b66d10a0eb6df8f6fb06"
-  integrity sha512-yEJzHoxf6SyQGhBhIYGXQDSCkJjB6HohDShto7m8vaKg9Yp0Yn8+71J9eakh2bnPg6BfsH9PRMhiRTZnd4eXGQ==
+  version "15.0.17"
+  resolved "https://registry.yarnpkg.com/@types/yargs/-/yargs-15.0.17.tgz#bea870ba551b43831bfaa75de2e4a3849c39322b"
+  integrity sha512-cj53I8GUcWJIgWVTSVe2L7NJAB5XWGdsoMosVvUgv1jEnMbAcsbaCzt1coUcyi8Sda5PgTWAooG8jNyDTD+CWA==
   dependencies:
     "@types/yargs-parser" "*"
 
