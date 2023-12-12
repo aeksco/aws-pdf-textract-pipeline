@@ -2411,15 +2411,7 @@ into-stream@^3.1.0:
     from2 "^2.1.1"
     p-is-promise "^1.1.0"
 
-is-accessor-descriptor@^0.1.6:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/is-accessor-descriptor/-/is-accessor-descriptor-0.1.7.tgz#118964354c1d55b616764042b70b782e777139c3"
-  integrity sha512-Qw68noCVXHAbixVCPiM1lrVG+hT9DfrdA/bOKe0rs/KoJYOF7CzFnymagWRbi3b6ngxO9cH5NMke94v9rAkbfQ==
-  dependencies:
-    gopd "^1.0.1"
-    hasown "^2.0.0"
-
-is-accessor-descriptor@^1.0.0:
+is-accessor-descriptor@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/is-accessor-descriptor/-/is-accessor-descriptor-1.0.1.tgz#3223b10628354644b86260db29b3e693f5ceedd4"
   integrity sha512-YBUanLI8Yoihw923YeFUS5fs0fF2f5TSFTNiYAAzhhDscDa3lEqYuz1pDOEP5KvX94I9ey3vsqjJcLVFVU+3QA==
@@ -2463,15 +2455,7 @@ is-core-module@^2.13.0:
   dependencies:
     hasown "^2.0.0"
 
-is-data-descriptor@^0.1.4:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/is-data-descriptor/-/is-data-descriptor-0.1.5.tgz#0907e763b9989b5b01c10a5aa5d09469bbae392e"
-  integrity sha512-a7ZgE8u0mkmoWpRMbmuwFQRFa2IFNcbG4eR+iqMYghjMTdXYitWgttZCxGit7zCc98gvO1TvOF0sSEZuZEvbPQ==
-  dependencies:
-    gopd "^1.0.1"
-    hasown "^2.0.0"
-
-is-data-descriptor@^1.0.0:
+is-data-descriptor@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/is-data-descriptor/-/is-data-descriptor-1.0.1.tgz#2109164426166d32ea38c405c1e0945d9e6a4eeb"
   integrity sha512-bc4NlCDiCr28U4aEsQ3Qs2491gVq4V8G7MQyws968ImqjKuYtTJXrl7Vq7jsN7Ly/C3xj5KWFrY7sHNeDkAzXw==
@@ -2479,22 +2463,20 @@ is-data-descriptor@^1.0.0:
     hasown "^2.0.0"
 
 is-descriptor@^0.1.0:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/is-descriptor/-/is-descriptor-0.1.6.tgz#366d8240dde487ca51823b1ab9f07a10a78251ca"
-  integrity sha512-avDYr0SB3DwO9zsMov0gKCESFYqCnE4hq/4z3TdUlukEy5t9C0YRq7HLrsN52NAcqXKaepeCD0n+B0arnVG3Hg==
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/is-descriptor/-/is-descriptor-0.1.7.tgz#2727eb61fd789dcd5bdf0ed4569f551d2fe3be33"
+  integrity sha512-C3grZTvObeN1xud4cRWl366OMXZTj0+HGyk4hvfpx4ZHt1Pb60ANSXqCK7pdOTeUQpRzECBSTphqvD7U+l22Eg==
   dependencies:
-    is-accessor-descriptor "^0.1.6"
-    is-data-descriptor "^0.1.4"
-    kind-of "^5.0.0"
+    is-accessor-descriptor "^1.0.1"
+    is-data-descriptor "^1.0.1"
 
 is-descriptor@^1.0.0, is-descriptor@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/is-descriptor/-/is-descriptor-1.0.2.tgz#3b159746a66604b04f8c81524ba365c5f14d86ec"
-  integrity sha512-2eis5WqQGV7peooDyLmNEPUrps9+SXX5c9pL3xEB+4e9HnGuDa7mB7kHxHw4CbqS9k1T2hOH3miL8n8WtiYVtg==
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/is-descriptor/-/is-descriptor-1.0.3.tgz#92d27cb3cd311c4977a4db47df457234a13cb306"
+  integrity sha512-JCNNGbwWZEVaSPtS45mdtrneRWJFp07LLmykxeFV5F6oBvNF8vHSfJuJgoT472pSfk+Mf8VnlrspaFBHWM8JAw==
   dependencies:
-    is-accessor-descriptor "^1.0.0"
-    is-data-descriptor "^1.0.0"
-    kind-of "^6.0.2"
+    is-accessor-descriptor "^1.0.1"
+    is-data-descriptor "^1.0.1"
 
 is-docker@^2.0.0:
   version "2.2.1"
@@ -3173,11 +3155,6 @@ kind-of@^4.0.0:
   integrity sha512-24XsCxmEbRwEDbz/qz3stgin8TTzZ1ESR56OMCN0ujYg+vRutNSiOj9bHH9u85DKgXguraugV5sFuvbD4FW/hw==
   dependencies:
     is-buffer "^1.1.5"
-
-kind-of@^5.0.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-5.1.0.tgz#729c91e2d857b7a419a1f9aa65685c4c33f5845d"
-  integrity sha512-NGEErnH6F2vUuXDh+OlbcKW7/wOcfdRHaZ7VWtqCztfHri/++YKmP51OdWeGPuqCOba6kk2OTe5d02VmTB80Pw==
 
 kind-of@^6.0.2:
   version "6.0.3"
